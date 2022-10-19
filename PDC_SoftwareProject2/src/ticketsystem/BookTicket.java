@@ -1,4 +1,3 @@
-// Add another comment.
 package ticketsystem;
 
 import java.time.LocalDate;
