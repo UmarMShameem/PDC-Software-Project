@@ -27,7 +27,7 @@ public class BookingApp {
             input = scan.nextLine();
             
             if (ui.containsUser(input, false) && !(input.equalsIgnoreCase("x"))) {
-                // User is registered.
+                // User is regi.stered.
                 currentUser = ui.loadUser(input);
                 registered = true;
             }
