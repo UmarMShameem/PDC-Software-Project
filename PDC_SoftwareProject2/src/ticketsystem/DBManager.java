@@ -13,6 +13,7 @@ public abstract class DBManager {
     private static final String USER_NAME = "pdc";
     private static final String PASSWORD = "pdcproj2";
     private static final String URL = "jdbc:derby://localhost:1527/BookingSystemDB";
+//    private static final String URL = "jdbc:derby:BookingSystemDB; create=true";
     
     Connection connection;
     
@@ -20,6 +21,7 @@ public abstract class DBManager {
         establishConnection();
     }
     
+    // Establish connection to BookingSystemDB.
     public void establishConnection() {
         if (this.connection == null) {
             try {
@@ -31,6 +33,7 @@ public abstract class DBManager {
         }
     }
     
+    // Returns Statement object from this connection. Statement is used to execute queries and updates.
     public final Statement getStatement() {
         try {
             return connection.createStatement();
@@ -41,6 +44,7 @@ public abstract class DBManager {
         return null;
     }
     
+    // Return true if BookingSystemDB contains a table matching tableName, false otherwise.
     public final boolean containsTable(String tableName) {
         try {
             DatabaseMetaData dbmd = connection.getMetaData();

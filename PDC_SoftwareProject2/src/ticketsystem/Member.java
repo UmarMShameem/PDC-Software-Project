@@ -11,15 +11,15 @@ final public class Member extends User {
     
     // Constructor for loading an existing member
     public Member(String username, String password, String fullname, PayAcc payAccount, HashSet<Ticket> bookings, int memberID, LocalDate expiry) {
-        super(username, password, fullname, payAccount, bookings);
+        super(username, password, fullname, payAccount);
         this.setMemberID(memberID);
         this.setExpiry(expiry);
     }
 
     // Constructor for new members.
     // Assigns a new 9-digit ID and expiry date 1 year after system date.
-    public Member(String username, String password, String fullname, PayAcc payAccount, HashSet<Ticket> bookings) {
-        super(username, password, fullname, payAccount, bookings);
+    public Member(String username, String password, String fullname, PayAcc payAccount) {
+        super(username, password, fullname, payAccount);
         this.setMemberID(generateID());
         this.setExpiry(LocalDate.now().plusYears(1));
     }

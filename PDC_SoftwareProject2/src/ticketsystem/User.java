@@ -18,12 +18,11 @@ public class User {
     }
     
     // Constructor for loading an existing User
-    public User(String username, String password, String fullname, PayAcc payAccount, HashSet<Ticket> bookings) {
+    public User(String username, String password, String fullname, PayAcc payAccount) {
         this.setUsername(username);
         this.setPassword(password);
         this.setFullname(fullname);
         this.setPayAccount(payAccount);
-        this.setBookings(bookings);
     }
     
     public String getUsername() {
