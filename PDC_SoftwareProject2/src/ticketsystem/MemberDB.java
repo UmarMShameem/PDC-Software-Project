@@ -60,6 +60,12 @@ public class MemberDB extends DBManager {
     public void createTable() {
         if (!this.containsTable("MEMBERS")) {
             String memberCreate = "CREATE TABLE MEMBERS(MEMBER_ID INT, MEMBERSHIP_EXPIRY DATE, USERNAME VARCHAR(20), PASSWORD VARCHAR(20), FULLNAME VARCHAR(30), PA_EMAIL VARCHAR(20))";
+            try {
+                statement.executeUpdate(memberCreate);
+            } 
+            catch (SQLException ex) {
+                Logger.getLogger(MemberDB.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }
