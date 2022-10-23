@@ -16,9 +16,11 @@ public abstract class DBManager {
 //    private static final String URL = "jdbc:derby:BookingSystemDB; create=true";
     
     Connection connection;
+    Statement statement;
     
     public DBManager() {
         establishConnection();
+        statement = getStatement();
     }
     
     // Establish connection to BookingSystemDB.

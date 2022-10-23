@@ -1,17 +1,13 @@
 package ticketsystem;
 
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public final class UserDB extends DBManager {
-    private Statement statement;
-    
     public UserDB() {
         super();
-        statement = getStatement();
         createTable();
     }
     
