@@ -1,10 +1,15 @@
 package ticketsystem;
 
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-public class DBManager {
+public abstract class DBManager {
     private static final String USER_NAME = "pdc";
     private static final String PASSWORD = "pdcproj2";
     private static final String URL = "jdbc:derby://localhost:1527/BookingSystemDB";
@@ -25,4 +30,31 @@ public class DBManager {
             }
         }
     }
+    
+    public final Statement getStatement() {
+        try {
+            return connection.createStatement();
+        } 
+        catch (SQLException ex) {
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public final boolean containsTable(String tableName) {
+        try {
+            DatabaseMetaData dbmd = connection.getMetaData();
+            ResultSet rs = dbmd.getTables(null, "PDC", tableName, null);
+            if (rs.next()) {
+                return true;
+            }
+        } 
+        catch (SQLException ex) {
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
+    // Sub-classes will override createTable method to create either User, Member, PayAcc or Ticket tables.
+    public abstract void createTable();
 }
