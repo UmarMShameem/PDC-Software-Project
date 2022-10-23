@@ -1,17 +1,23 @@
 package ticketsystem;
 
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Random;
 
-final public class Member extends User {
+public final class Member extends User {
     public static final double MEMBER_DISCOUNT = 0.12;
     private int memberID;
     private LocalDate expiry;
     
     // Constructor for loading an existing member
-    public Member(String username, String password, String fullname, PayAcc payAccount, HashSet<Ticket> bookings, int memberID, LocalDate expiry) {
+    public Member(String username, String password, String fullname, PayAcc payAccount, int memberID, LocalDate expiry) {
         super(username, password, fullname, payAccount);
+        this.setMemberID(memberID);
+        this.setExpiry(expiry);
+    }
+    
+    // Load an existing member that does not have a PayAcc saved.
+    public Member(String username, String password, String fullname, int memberID, LocalDate expiry) {
+        super(username, password, fullname);
         this.setMemberID(memberID);
         this.setExpiry(expiry);
     }
