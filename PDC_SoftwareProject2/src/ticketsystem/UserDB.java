@@ -76,7 +76,7 @@ public final class UserDB extends DBManager {
     public void createTable() {
         // Creatte user table if it does not exist in the database.
         if (!this.containsTable("USERS")) {
-            String userCreate = "CREATE TABLE USERS (USERNAME VARCHAR(20), PASSWORD VARCHAR(20), FULLNAME VARCHAR(30), PA_EMAIL VARCHAR(20))";
+            String userCreate = "CREATE TABLE USERS (USERNAME VARCHAR(20), PASSWORD VARCHAR(20), FULLNAME VARCHAR(40), PA_EMAIL VARCHAR(20))";
             try {
                 statement.executeUpdate(userCreate);
             } 
