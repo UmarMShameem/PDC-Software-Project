@@ -13,6 +13,21 @@ public class TicketDB extends DBManager {
         createTable();
     }
 
+    public boolean containsTicketNo(int ticketNo) {
+        String sqlQuery = "SELECT * FROM TICKETS WHERE TICKET_NO="+ticketNo;
+        ResultSet rs;
+        try {
+            rs = statement.executeQuery(sqlQuery);
+            if (rs.next()) {
+                return true;
+            }
+        } 
+        catch (SQLException ex) {
+            Logger.getLogger(TicketDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
     public Ticket loadTicket(int ticketNo) {
         String sqlQuery = "SELECT * FROM TICKETS WHERE TICKET_NO="+ticketNo;
         try {

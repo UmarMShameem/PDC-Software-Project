@@ -48,10 +48,9 @@ public final class Ticket {
     public int generateTicketNo() {
         int newTicketNo = new Random().nextInt(100000, 999999);
         
-//        if (new TicketIO().containsTicket(newTicketNo)) {
-//            return generateTicketNo();
-//        }
-        // TODO: Check Tickets table if generated ticket number already exists.
+        if (new TicketDB().containsTicketNo(newTicketNo)) {
+            return generateTicketNo();
+        }
         
         return newTicketNo;
     }
