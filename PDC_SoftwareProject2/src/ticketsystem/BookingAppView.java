@@ -42,12 +42,14 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
         jlFName = new javax.swing.JLabel();
         jtfFName = new javax.swing.JTextField();
         jlHeader = new javax.swing.JLabel();
+        homePanel = new javax.swing.JPanel();
+        jbLogOut = new javax.swing.JButton();
         loginPanel = new javax.swing.JPanel();
         jtfUsername = new javax.swing.JTextField();
         jlUsername = new javax.swing.JLabel();
         jlPassword = new javax.swing.JLabel();
         jbLogin = new javax.swing.JButton();
-        jpfPassword = new javax.swing.JPasswordField();
+        jtfPassword = new javax.swing.JPasswordField();
         jbCreateAccount = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jlInvalidPassword = new javax.swing.JLabel();
@@ -132,6 +134,25 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 .addContainerGap(49, Short.MAX_VALUE))
         );
 
+        jbLogOut.setText("Log Out");
+
+        javax.swing.GroupLayout homePanelLayout = new javax.swing.GroupLayout(homePanel);
+        homePanel.setLayout(homePanelLayout);
+        homePanelLayout.setHorizontalGroup(
+            homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homePanelLayout.createSequentialGroup()
+                .addContainerGap(421, Short.MAX_VALUE)
+                .addComponent(jbLogOut)
+                .addContainerGap())
+        );
+        homePanelLayout.setVerticalGroup(
+            homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homePanelLayout.createSequentialGroup()
+                .addContainerGap(359, Short.MAX_VALUE)
+                .addComponent(jbLogOut)
+                .addContainerGap())
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
@@ -165,7 +186,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                     .addComponent(jlPassword))
                 .addGap(18, 18, 18)
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jpfPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                    .addComponent(jtfPassword, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
                     .addComponent(jtfUsername))
                 .addGap(59, 59, 59))
             .addGroup(loginPanelLayout.createSequentialGroup()
@@ -195,7 +216,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlPassword)
-                    .addComponent(jpfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlInvalidPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -277,9 +298,11 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel createAccountPanel;
+    private javax.swing.JPanel homePanel;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JButton jbConfirm;
     private javax.swing.JButton jbCreateAccount;
+    private javax.swing.JButton jbLogOut;
     private javax.swing.JButton jbLogin;
     private javax.swing.JLabel jlConfirmPass;
     private javax.swing.JLabel jlFName;
@@ -289,12 +312,12 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
     private javax.swing.JLabel jlPassword;
     private javax.swing.JLabel jlUName;
     private javax.swing.JLabel jlUsername;
-    private javax.swing.JPasswordField jpfPassword;
-    private javax.swing.JPasswordField jtfConfirmPass;
-    private javax.swing.JTextField jtfFName;
-    private javax.swing.JPasswordField jtfNewPass;
-    private javax.swing.JTextField jtfUName;
-    private javax.swing.JTextField jtfUsername;
+    public javax.swing.JPasswordField jtfConfirmPass;
+    public javax.swing.JTextField jtfFName;
+    public javax.swing.JPasswordField jtfNewPass;
+    public javax.swing.JPasswordField jtfPassword;
+    public javax.swing.JTextField jtfUName;
+    public javax.swing.JTextField jtfUsername;
     private javax.swing.JPanel loginPanel;
     // End of variables declaration//GEN-END:variables
 
@@ -304,6 +327,13 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
         if (panelName.equals("Create Account")) {
             setContentPane(createAccountPanel);
             setSize(createAccountPanel.getPreferredSize());
+        }
+        else if (panelName.equals("Log in")) {
+            setContentPane(homePanel);
+            setSize(homePanel.getPreferredSize());
+        }
+        else if (panelName.equals("Invalid login credentials")) {
+            jlInvalidPassword.setText("Invalid login credentials. Please try again.");
         }
     }
 }
