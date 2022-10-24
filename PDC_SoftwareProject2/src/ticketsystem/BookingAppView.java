@@ -4,6 +4,7 @@
  */
 package ticketsystem;
 
+import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -84,9 +85,6 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                         .addGap(75, 75, 75)
                         .addComponent(jbConfirm))
                     .addGroup(createAccountPanelLayout.createSequentialGroup()
-                        .addGap(94, 94, 94)
-                        .addComponent(jlHeader))
-                    .addGroup(createAccountPanelLayout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(jlConfirmPass)
                         .addGap(18, 18, 18)
@@ -102,15 +100,18 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                             .addComponent(jtfFName, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(createAccountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jtfNewPass, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-                                .addComponent(jtfUName)))))
-                .addContainerGap(43, Short.MAX_VALUE))
+                                .addComponent(jtfUName))))
+                    .addGroup(createAccountPanelLayout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addComponent(jlHeader)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         createAccountPanelLayout.setVerticalGroup(
             createAccountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(createAccountPanelLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(18, 18, 18)
                 .addComponent(jlHeader)
-                .addGap(30, 30, 30)
+                .addGap(28, 28, 28)
                 .addGroup(createAccountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfFName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlFName))
@@ -224,20 +225,21 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
 
     private void jbCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCreateAccountActionPerformed
         // TODO add your handling code here:
-        setContentPane(createAccountPanel);
-        setSize(createAccountPanel.getPreferredSize());
     }//GEN-LAST:event_jbCreateAccountActionPerformed
 
     private void jbConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConfirmActionPerformed
         // TODO add your handling code here:
-        setContentPane(loginPanel);
-        setSize(loginPanel.getPreferredSize());
     }//GEN-LAST:event_jbConfirmActionPerformed
 
     private void jtfUNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfUNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfUNameActionPerformed
 
+    public void addActionListener(ActionListener al) {
+        jbLogin.addActionListener(al);
+        jbCreateAccount.addActionListener(al);
+        jbConfirm.addActionListener(al);
+    }
     /**
      * @param args the command line arguments
      */
@@ -298,6 +300,10 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String panelName = (String) arg;
+        if (panelName.equals("Create Account")) {
+            setContentPane(createAccountPanel);
+            setSize(createAccountPanel.getPreferredSize());
+        }
     }
 }
