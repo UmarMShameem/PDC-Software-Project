@@ -31,11 +31,11 @@ public final class Member extends User {
     }
     
     // Generates a new, random 9-digit ID. 
-    // Method uses recursion for when the new ID already exists in the file.
+    // Method uses recursion for when the new ID already exists in the database.
     private int generateID() {
         int newID = new Random().nextInt(100000000, 999999999);
         
-        if (new UserIO().containsMemberID(newID)) {
+        if (new MemberDB().containsMemberID(newID)) {
             return generateID();
         }
         

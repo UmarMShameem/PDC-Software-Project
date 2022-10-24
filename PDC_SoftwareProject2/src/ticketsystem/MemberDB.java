@@ -12,6 +12,20 @@ public class MemberDB extends DBManager {
         createTable();
     }
     
+    public boolean containsMemberID(int memberID) {
+        String sqlQuery = "SELECT * FROM MEMBERS WHERE MEMBER_ID="+memberID;
+        try {
+            ResultSet rs = statement.executeQuery(sqlQuery);
+            if (rs.next()) {
+                return true;
+            }
+        } 
+        catch (SQLException ex) {
+            Logger.getLogger(MemberDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
     public Member loadMember(int memberID) {
         String sqlQuery = "SELECT * FROM MEMBERS WHERE MEMBER_ID="+memberID;
         try {
