@@ -11,7 +11,21 @@ public final class UserDB extends DBManager {
         createTable();
     }
     
-    // Finds a row in the USERS table matching username, returns User object with data from that row.
+    public boolean containsUser(String username) {
+        String sqlQuery = "SELECT * FROM USERS WHERE USERNAME='"+username+"'";
+        try {
+            ResultSet rs = statement.executeQuery(sqlQuery);
+            if (rs.next()) {
+                return true;
+            }
+        } 
+        catch (SQLException ex) {
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+// Finds a row in the USERS table matching username, returns User object with data from that row.
     public User loadUser(String username) {
         String sqlQuery = "SELECT * FROM USERS WHERE USERNAME='"+username+"'";
         try {
