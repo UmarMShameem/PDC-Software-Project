@@ -40,8 +40,8 @@ public class MemberDB extends DBManager {
         return false;
     }
     
-    public Member loadMember(int memberID) {
-        String sqlQuery = "SELECT * FROM MEMBERS WHERE MEMBER_ID="+memberID;
+    public Member loadMember(String username) {
+        String sqlQuery = "SELECT * FROM MEMBERS WHERE USERNAME='"+username+"'";
         try {
             ResultSet rs = statement.executeQuery(sqlQuery);
             if (rs.next()) {
