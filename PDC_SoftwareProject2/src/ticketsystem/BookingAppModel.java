@@ -22,45 +22,45 @@ public class BookingAppModel extends Observable {
     // Notify View to switch to the Create Account JPanel.
     public void createAccount() {
         this.setChanged();
-        this.notifyObservers("Create Account");
+        this.notifyObservers(Input.CREATE_ACCOUNT);
     }
     
     public void confirmCreateAccount(String username, String fullname, String password) {
         currentUser = new User(username, password, fullname);
         userDB.saveUser(currentUser);
         this.setChanged();
-        this.notifyObservers("Log in");
+        this.notifyObservers(Input.CREATE_ACCOUNT_SUCCESS);
     }
     
     // Confirm whether the user input is valid.
     public boolean validAccountDetails(String username, String fullname, String newPassword, String confirmPassword) {
         if (userDB.containsUser(username)) { // Username already exists in database.
             this.setChanged();
-            this.notifyObservers("Username already in use");
+            this.notifyObservers(Input.USERNAME_EXISTS);
             return false;
         }
         else if (username.length() > 15 || username.length() < 5 || username.contains(" ")) {
             // Username must be 5-15 characters in length and must not contain spaces.
             this.setChanged();
-            this.notifyObservers("Username requirements not met");
+            this.notifyObservers(Input.INVALID_USERNAME);
             return false;
         }
         else if (fullname.length() < 5 || fullname.length() > 40) {
             // Full name must be 5-40 characters in length.
             this.setChanged();
-            this.notifyObservers("Full name length invalid");
+            this.notifyObservers(Input.INVALID_NAME_LENGTH);
             return false;
         }
         else if (newPassword.length() < 8 || newPassword.length() > 20 || newPassword.contains(" ")) {
             // Password must be 8-20 characters in length and must not contain spaces.
             this.setChanged();
-            this.notifyObservers("Password requirements not met");
+            this.notifyObservers(Input.INVALID_NEW_PASSWORD);
             return false;
         }
         else if (!newPassword.equals(confirmPassword)) {
             // Both password fields must be equal.
             this.setChanged();
-            this.notifyObservers("Unequal password fields");
+            this.notifyObservers(Input.NEW_PASSWORD_MISMATCH);
             return false;
         }
         else {
@@ -68,7 +68,7 @@ public class BookingAppModel extends Observable {
             for (char c: fullname.toCharArray()) {
                 if ((c < 'A' && c != ' ') || c > 'z' || (c > 'Z' && c < 'a')) {
                     this.setChanged();
-                    this.notifyObservers("Invalid characters in full name");
+                    this.notifyObservers(Input.INVALID_NAME);
                     return false;
                 }
             }
@@ -91,7 +91,7 @@ public class BookingAppModel extends Observable {
             }
         }
         this.setChanged();
-        this.notifyObservers("Invalid login credentials");
+        this.notifyObservers(Input.INVALID_LOGIN_CREDENTIALS);
         return false;
     }
     
@@ -99,6 +99,6 @@ public class BookingAppModel extends Observable {
     public void login(String username) {
         currentUser = userDB.loadUser(username);
         this.setChanged();
-        this.notifyObservers("Log in");
+        this.notifyObservers(Input.LOG_IN);
     }
 }
