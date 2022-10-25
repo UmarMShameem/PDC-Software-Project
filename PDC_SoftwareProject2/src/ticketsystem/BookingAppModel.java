@@ -30,6 +30,7 @@ public class BookingAppModel extends Observable {
         userDB.saveUser(currentUser);
         this.setChanged();
         this.notifyObservers(Input.CREATE_ACCOUNT_SUCCESS);
+        this.notifyObservers(currentUser.getUsername());
     }
     
     // Confirm whether the user input is valid.
@@ -105,5 +106,8 @@ public class BookingAppModel extends Observable {
         }
         this.setChanged();
         this.notifyObservers(Input.LOG_IN);
+        
+        this.setChanged();
+        this.notifyObservers(currentUser.getUsername());
     }
 }
