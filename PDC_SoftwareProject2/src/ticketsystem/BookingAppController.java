@@ -31,9 +31,6 @@ public class BookingAppController implements ActionListener  {
                 if (this.model.validLoginCredentials(username, password)) {
                     this.model.login(username);
                 }
-                else {
-                    // Invalid login credentials entered, so display a message on the view.
-                }
                 break;
             case "Confirm & Create Account":
                 String newUsername = this.view.jtfUName.getText();

@@ -7,6 +7,7 @@ package ticketsystem;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -42,7 +43,6 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
         jlFName = new javax.swing.JLabel();
         jtfFName = new javax.swing.JTextField();
         jlHeader = new javax.swing.JLabel();
-        jlCreateError = new javax.swing.JLabel();
         homePanel = new javax.swing.JPanel();
         jbLogOut = new javax.swing.JButton();
         loginPanel = new javax.swing.JPanel();
@@ -78,8 +78,6 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
 
         jlHeader.setText("Enter your new account details.");
 
-        jlCreateError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-
         javax.swing.GroupLayout createAccountPanelLayout = new javax.swing.GroupLayout(createAccountPanel);
         createAccountPanel.setLayout(createAccountPanelLayout);
         createAccountPanelLayout.setHorizontalGroup(
@@ -87,42 +85,36 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
             .addGroup(createAccountPanelLayout.createSequentialGroup()
                 .addGroup(createAccountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(createAccountPanelLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(createAccountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jlNewPass)
+                            .addComponent(jlUName)
+                            .addComponent(jlFName))
+                        .addGap(18, 18, 18)
                         .addGroup(createAccountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(createAccountPanelLayout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addGroup(createAccountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jlNewPass)
-                                    .addComponent(jlUName)
-                                    .addComponent(jlFName))
-                                .addGap(18, 18, 18)
-                                .addGroup(createAccountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtfFName, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(createAccountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jtfNewPass, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
-                                        .addComponent(jtfUName))))
-                            .addGroup(createAccountPanelLayout.createSequentialGroup()
-                                .addGap(76, 76, 76)
-                                .addComponent(jlHeader))
-                            .addGroup(createAccountPanelLayout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jlConfirmPass)
-                                .addGap(18, 18, 18)
-                                .addComponent(jtfConfirmPass, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(createAccountPanelLayout.createSequentialGroup()
-                                .addGap(72, 72, 72)
-                                .addComponent(jbConfirm)))
-                        .addGap(0, 18, Short.MAX_VALUE))
+                            .addComponent(jtfFName, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(createAccountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jtfNewPass, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+                                .addComponent(jtfUName))))
                     .addGroup(createAccountPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jlCreateError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(76, 76, 76)
+                        .addComponent(jlHeader))
+                    .addGroup(createAccountPanelLayout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jlConfirmPass)
+                        .addGap(18, 18, 18)
+                        .addComponent(jtfConfirmPass, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(createAccountPanelLayout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addComponent(jbConfirm)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         createAccountPanelLayout.setVerticalGroup(
             createAccountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(createAccountPanelLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(34, 34, 34)
                 .addComponent(jlHeader)
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addGroup(createAccountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtfFName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlFName))
@@ -138,11 +130,9 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 .addGroup(createAccountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlConfirmPass)
                     .addComponent(jtfConfirmPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(7, 7, 7)
-                .addComponent(jlCreateError, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(28, 28, 28)
                 .addComponent(jbConfirm)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         jbLogOut.setText("Log Out");
@@ -203,16 +193,17 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
             .addGroup(loginPanelLayout.createSequentialGroup()
                 .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(loginPanelLayout.createSequentialGroup()
-                        .addGap(86, 86, 86)
-                        .addGroup(loginPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jlInvalidPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(loginPanelLayout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addComponent(jbLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jbCreateAccount, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)))
-                    .addGroup(loginPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(loginPanelLayout.createSequentialGroup()
+                        .addGap(86, 86, 86)
+                        .addComponent(jbCreateAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(loginPanelLayout.createSequentialGroup()
+                        .addGap(106, 106, 106)
+                        .addComponent(jbLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(loginPanelLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jlInvalidPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         loginPanelLayout.setVerticalGroup(
@@ -234,7 +225,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 .addComponent(jbLogin)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbCreateAccount)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -249,7 +240,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(loginPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 184, Short.MAX_VALUE))
+                .addGap(0, 173, Short.MAX_VALUE))
         );
 
         pack();
@@ -316,7 +307,6 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
     private javax.swing.JButton jbLogOut;
     private javax.swing.JButton jbLogin;
     private javax.swing.JLabel jlConfirmPass;
-    private javax.swing.JLabel jlCreateError;
     private javax.swing.JLabel jlFName;
     private javax.swing.JLabel jlHeader;
     private javax.swing.JLabel jlInvalidPassword;
@@ -342,7 +332,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 setSize(createAccountPanel.getPreferredSize());
                 break;
             case CREATE_ACCOUNT_SUCCESS:
-                // TODO: Display message box.
+                JOptionPane.showMessageDialog(null, "Your account has successfully been created.", "Success", JOptionPane.PLAIN_MESSAGE);
                 setContentPane(homePanel);
                 setSize(homePanel.getPreferredSize());
                 break;
@@ -350,26 +340,26 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 jlInvalidPassword.setText("Invalid login credentials. Try again.");
                 break;
             case INVALID_NAME:
-                jlCreateError.setText("Full name must only contain letters and spaces.");
+                JOptionPane.showMessageDialog(null, "Full name must only contain letters and spaces.", "Error", JOptionPane.ERROR_MESSAGE);
                 break;
             case INVALID_NAME_LENGTH:
-                jlCreateError.setText("Full name must be between 5 and 40 characters in length.");
+                JOptionPane.showMessageDialog(null, "Full name must be between 5 and 40 characters in length.", "Error", JOptionPane.ERROR_MESSAGE);
                 break;
             case INVALID_NEW_PASSWORD:
-                jlCreateError.setText("Passwords must be 8 to 20 characters in length and not contain spaces.");
+                JOptionPane.showMessageDialog(null, "Passwords must be 8 to 20 characters in length and must not contain spaces.", "Error", JOptionPane.ERROR_MESSAGE);
                 break;
             case INVALID_USERNAME:
-                jlCreateError.setText("Username must be 5 to 15 characters in length and must not contain spaces.");
+                JOptionPane.showMessageDialog(null, "Username must be 5 to 15 characters in length and must not contain spaces.", "Error", JOptionPane.ERROR_MESSAGE);
                 break;
             case LOG_IN:
                 setContentPane(homePanel);
                 setSize(homePanel.getPreferredSize());
                 break;
             case NEW_PASSWORD_MISMATCH:
-                jlCreateError.setText("Passwords do not match.");
+                JOptionPane.showMessageDialog(null, "Passwords do not match.", "Error", JOptionPane.ERROR_MESSAGE);
                 break;
             case USERNAME_EXISTS:
-                jlCreateError.setText("The username you entered is already in use.");
+                JOptionPane.showMessageDialog(null, "The username you entered is already in use.", "Error", JOptionPane.ERROR_MESSAGE);
                 break;
         }
     }

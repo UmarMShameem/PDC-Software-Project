@@ -18,7 +18,7 @@ public class BookingAppModel extends Observable {
         payDB = new PayAccDB();
         menuDB = new MenuDB();
     }
-    
+
     // Notify View to switch to the Create Account JPanel.
     public void createAccount() {
         this.setChanged();
@@ -97,7 +97,12 @@ public class BookingAppModel extends Observable {
     
     // After the user logs in, notify View to switch to the home JPanel.
     public void login(String username) {
-        currentUser = userDB.loadUser(username);
+        if (userDB.containsUser(username)) {
+            currentUser = userDB.loadUser(username);
+        }
+        else {
+            currentUser = memberDB.loadMember(username);
+        }
         this.setChanged();
         this.notifyObservers(Input.LOG_IN);
     }
