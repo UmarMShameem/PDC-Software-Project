@@ -10,6 +10,7 @@ public class BookingAppModel extends Observable {
     MenuDB menuDB;
     
     User currentUser;
+    Output output;
     
     public BookingAppModel() {
         userDB = new UserDB();
@@ -17,64 +18,67 @@ public class BookingAppModel extends Observable {
         ticketDB = new TicketDB();
         payDB = new PayAccDB();
         menuDB = new MenuDB();
+        
+        output = new Output();
     }
 
     // Notify View to switch to the Create Account JPanel.
     public void createAccount() {
+        output.action = Output.CREATE_ACCOUNT;
         this.setChanged();
-        this.notifyObservers(Input.CREATE_ACCOUNT);
+        this.notifyObservers(output);
     }
     
     public void confirmCreateAccount(String username, String fullname, String password) {
         currentUser = new User(username, password, fullname);
         userDB.saveUser(currentUser);
+        output.action = Output.CREATE_ACCOUNT_SUCCESS;
+        output.outputString = currentUser.getUsername();
         this.setChanged();
-        this.notifyObservers(Input.CREATE_ACCOUNT_SUCCESS);
-        this.notifyObservers(currentUser.getUsername());
+        this.notifyObservers(output);
+        output.outputString = null;
     }
     
     // Confirm whether the user input is valid.
     public boolean validAccountDetails(String username, String fullname, String newPassword, String confirmPassword) {
+        boolean isValid = false;
+        
         if (userDB.containsUser(username)) { // Username already exists in database.
-            this.setChanged();
-            this.notifyObservers(Input.USERNAME_EXISTS);
-            return false;
+            output.action = Output.USERNAME_EXISTS;
         }
         else if (username.length() > 15 || username.length() < 5 || username.contains(" ")) {
             // Username must be 5-15 characters in length and must not contain spaces.
-            this.setChanged();
-            this.notifyObservers(Input.INVALID_USERNAME);
-            return false;
+            output.action = Output.INVALID_USERNAME;
         }
         else if (fullname.length() < 5 || fullname.length() > 40) {
             // Full name must be 5-40 characters in length.
-            this.setChanged();
-            this.notifyObservers(Input.INVALID_NAME_LENGTH);
-            return false;
+            output.action = Output.INVALID_NAME_LENGTH;
         }
         else if (newPassword.length() < 8 || newPassword.length() > 20 || newPassword.contains(" ")) {
             // Password must be 8-20 characters in length and must not contain spaces.
-            this.setChanged();
-            this.notifyObservers(Input.INVALID_NEW_PASSWORD);
-            return false;
+            output.action = Output.INVALID_NEW_PASSWORD;
         }
         else if (!newPassword.equals(confirmPassword)) {
             // Both password fields must be equal.
-            this.setChanged();
-            this.notifyObservers(Input.NEW_PASSWORD_MISMATCH);
-            return false;
+            output.action = Output.NEW_PASSWORD_MISMATCH;
         }
         else {
             // Check if full name only contains letters and spaces.
+            isValid = true;
             for (char c: fullname.toCharArray()) {
                 if ((c < 'A' && c != ' ') || c > 'z' || (c > 'Z' && c < 'a')) {
-                    this.setChanged();
-                    this.notifyObservers(Input.INVALID_NAME);
-                    return false;
+                    output.action = Output.INVALID_NAME;
+                    isValid = false;
                 }
             }
         }
-        return true;
+        
+        // Notify the observer.
+        if (!isValid) {
+            this.setChanged();
+            this.notifyObservers(output);
+        }
+        return isValid;
     }
     
     // Check USERS and MEMBERS tables to validate credentials entered by user.
@@ -91,8 +95,9 @@ public class BookingAppModel extends Observable {
                 return true;
             }
         }
+        output.action = Output.INVALID_LOGIN_CREDENTIALS;
         this.setChanged();
-        this.notifyObservers(Input.INVALID_LOGIN_CREDENTIALS);
+        this.notifyObservers(output);
         return false;
     }
     
@@ -104,10 +109,10 @@ public class BookingAppModel extends Observable {
         else {
             currentUser = memberDB.loadMember(username);
         }
+        output.action = Output.LOG_IN_SUCCESS;
+        output.outputString = currentUser.getUsername();
         this.setChanged();
-        this.notifyObservers(Input.LOG_IN);
-        
-        this.setChanged();
-        this.notifyObservers(currentUser.getUsername());
+        this.notifyObservers(output);
+        output.outputString = null;
     }
 }

@@ -325,48 +325,44 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        if (arg instanceof Input) {
-            Input argument = (Input) arg;
-            switch (argument) {
-                case CREATE_ACCOUNT:
-                    setContentPane(createAccountPanel);
-                    setSize(createAccountPanel.getPreferredSize());
-                    break;
-                case CREATE_ACCOUNT_SUCCESS:
-                    JOptionPane.showMessageDialog(null, "Your account has successfully been created.", "Success", JOptionPane.PLAIN_MESSAGE);
-                    setContentPane(homePanel);
-                    setSize(homePanel.getPreferredSize());
-                    break;
-                case INVALID_LOGIN_CREDENTIALS:
-                    jlInvalidPassword.setText("Invalid login credentials. Try again.");
-                    break;
-                case INVALID_NAME:
-                    JOptionPane.showMessageDialog(null, "Full name must only contain letters and spaces.", "Error", JOptionPane.ERROR_MESSAGE);
-                    break;
-                case INVALID_NAME_LENGTH:
-                    JOptionPane.showMessageDialog(null, "Full name must be between 5 and 40 characters in length.", "Error", JOptionPane.ERROR_MESSAGE);
-                    break;
-                case INVALID_NEW_PASSWORD:
-                    JOptionPane.showMessageDialog(null, "Passwords must be 8 to 20 characters in length and must not contain spaces.", "Error", JOptionPane.ERROR_MESSAGE);
-                    break;
-                case INVALID_USERNAME:
-                    JOptionPane.showMessageDialog(null, "Username must be 5 to 15 characters in length and must not contain spaces.", "Error", JOptionPane.ERROR_MESSAGE);
-                    break;
-                case LOG_IN:
-                    setContentPane(homePanel);
-                    setSize(homePanel.getPreferredSize());
-                    break;
-                case NEW_PASSWORD_MISMATCH:
-                    JOptionPane.showMessageDialog(null, "Passwords do not match.", "Error", JOptionPane.ERROR_MESSAGE);
-                    break;
-                case USERNAME_EXISTS:
-                    JOptionPane.showMessageDialog(null, "The username you entered is already in use.", "Error", JOptionPane.ERROR_MESSAGE);
-                    break;
-            }
-        }
-        else if (arg instanceof String) {
-            String argument = (String) arg;
-            jlCurrentUser.setText("Signed in as: "+argument);
+        Output argument = (Output) arg;
+        switch (argument.action) {
+            case Output.CREATE_ACCOUNT:
+                setContentPane(createAccountPanel);
+                setSize(createAccountPanel.getPreferredSize());
+                break;
+            case Output.CREATE_ACCOUNT_SUCCESS:
+                JOptionPane.showMessageDialog(null, "Your account has successfully been created.", "Success", JOptionPane.PLAIN_MESSAGE);
+                jlCurrentUser.setText("Signed in as: "+argument.outputString);
+                setContentPane(homePanel);
+                setSize(homePanel.getPreferredSize());
+                break;
+            case Output.INVALID_LOGIN_CREDENTIALS:
+                jlInvalidPassword.setText("Invalid login credentials. Try again.");
+                break;
+            case Output.INVALID_NAME:
+                JOptionPane.showMessageDialog(null, "Full name must only contain letters and spaces.", "Error", JOptionPane.ERROR_MESSAGE);
+                break;
+            case Output.INVALID_NAME_LENGTH:
+                JOptionPane.showMessageDialog(null, "Full name must be between 5 and 40 characters in length.", "Error", JOptionPane.ERROR_MESSAGE);
+                break;
+            case Output.INVALID_NEW_PASSWORD:
+                JOptionPane.showMessageDialog(null, "Passwords must be 8 to 20 characters in length and must not contain spaces.", "Error", JOptionPane.ERROR_MESSAGE);
+                break;
+            case Output.INVALID_USERNAME:
+                JOptionPane.showMessageDialog(null, "Username must be 5 to 15 characters in length and must not contain spaces.", "Error", JOptionPane.ERROR_MESSAGE);
+                break;
+            case Output.LOG_IN_SUCCESS:
+                jlCurrentUser.setText("Signed in as: "+argument.outputString);
+                setContentPane(homePanel);
+                setSize(homePanel.getPreferredSize());
+                break;
+            case Output.NEW_PASSWORD_MISMATCH:
+                JOptionPane.showMessageDialog(null, "Passwords do not match.", "Error", JOptionPane.ERROR_MESSAGE);
+                break;
+            case Output.USERNAME_EXISTS:
+                JOptionPane.showMessageDialog(null, "The username you entered is already in use.", "Error", JOptionPane.ERROR_MESSAGE);
+                break;
         }
     }
 }
