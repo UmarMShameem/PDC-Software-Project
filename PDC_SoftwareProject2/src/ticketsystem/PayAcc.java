@@ -1,5 +1,6 @@
 package ticketsystem;
 
+// Main payment method for the booking system, similar to PayPal.
 public class PayAcc {
     private String email; // Must contain '@', otherwise prompt for input again.
     private String password;
