@@ -34,6 +34,16 @@ public final class UserDB extends DBManager {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void changePassword(User user, String newPassword) {
+        String passwordUpdate = "UPDATE USERS SET PASSWORD = '"+newPassword+"' WHERE USERNAME = '"+user.getUsername()+"'";
+        try {
+            statement.executeUpdate(passwordUpdate);
+        } 
+        catch (SQLException ex) {
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 // Finds a row in the USERS table matching username, returns User object with data from that row.
     public User loadUser(String username) {

@@ -50,6 +50,16 @@ public class MemberDB extends DBManager {
         }
     }
     
+    public void changePassword(Member member, String newPassword) {
+        String passwordUpdate = "UPDATE MEMBERS SET PASSWORD = '"+newPassword+"' WHERE USERNAME = '"+member.getUsername()+"'";
+        try {
+            statement.executeUpdate(passwordUpdate);
+        } 
+        catch (SQLException ex) {
+            Logger.getLogger(MemberDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public Member loadMember(String username) {
         String sqlQuery = "SELECT * FROM MEMBERS WHERE USERNAME='"+username+"'";
         try {
