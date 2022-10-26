@@ -40,6 +40,16 @@ public class MemberDB extends DBManager {
         return false;
     }
     
+    public void deleteMember(String username) {
+        String memberDelete = "DELETE FROM MEMBERS WHERE USERNAME='"+username+"'";
+        try {
+            statement.executeUpdate(memberDelete);
+        } 
+        catch (SQLException ex) {
+            Logger.getLogger(MemberDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public Member loadMember(String username) {
         String sqlQuery = "SELECT * FROM MEMBERS WHERE USERNAME='"+username+"'";
         try {

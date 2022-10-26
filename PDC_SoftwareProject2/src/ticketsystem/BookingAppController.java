@@ -62,6 +62,21 @@ public class BookingAppController implements ActionListener  {
             case "Back to main menu":
                 this.model.backToHome();
                 break;
+            case "Change password":
+                String currentPassword = "";
+                String newUserPassword = "";
+                String confirmNewPassword = "";
+                for (char c: this.view.jpfSettingsCPass.getPassword()) {
+                    currentPassword += c;
+                }
+                for (char c: this.view.jpfSettingsNPass.getPassword()) {
+                    newUserPassword += c;
+                }
+                for (char c: this.view.jpfSettingsCNPass.getPassword()) {
+                    confirmNewPassword += c;
+                }
+                this.model.changePassword(currentPassword, newUserPassword, confirmNewPassword);
+                break;
         }
     }
     
