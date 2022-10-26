@@ -22,6 +22,12 @@ public class BookingAppModel extends Observable {
         output = new Output();
     }
 
+    public void backToHome() {
+        output.action = Output.BACK_TO_HOME;
+        this.setChanged();
+        this.notifyObservers(output);
+    }
+
     // Notify View to switch to the Create Account JPanel.
     public void createAccount() {
         output.action = Output.CREATE_ACCOUNT;
@@ -52,6 +58,14 @@ public class BookingAppModel extends Observable {
         output.action = Output.VIEW_ACCOUNT_SETTINGS;
         output.outputString1 = currentUser.getUsername();
         output.outputString2 = currentUser.getFullname();
+        
+        if (currentUser.getPayAccount() != null) {
+            output.outputString3 = "Saved payment method: "+currentUser.getPayAccount().getEmail();
+        }
+        else {
+            output.outputString3 = "No payment method saved.";
+        }
+        
         this.setChanged();
         this.notifyObservers(output);
     }

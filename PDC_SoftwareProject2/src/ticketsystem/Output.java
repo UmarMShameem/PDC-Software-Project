@@ -19,5 +19,6 @@ public class Output {
     // output strings to notify the View.
     String outputString1;
     String outputString2;
+    String outputString3;
     int action;
 }

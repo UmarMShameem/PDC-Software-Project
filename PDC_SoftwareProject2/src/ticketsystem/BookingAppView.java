@@ -64,7 +64,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
         jpfSettingsNPass = new javax.swing.JPasswordField();
         jpfSettingsCNPass = new javax.swing.JPasswordField();
         jbSettingsBack = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jlSettingsPayMethod = new javax.swing.JLabel();
         jbSettingsPayMethod = new javax.swing.JButton();
         loginPanel = new javax.swing.JPanel();
         jtfUsername = new javax.swing.JTextField();
@@ -227,7 +227,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
 
         jbSettingsBack.setText("Back to main menu");
 
-        jLabel1.setText("Saved payment method: ");
+        jlSettingsPayMethod.setText("Saved payment method: ");
 
         jbSettingsPayMethod.setText("Add/Remove Payment Method");
 
@@ -265,7 +265,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                             .addGroup(accSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jbSettingsBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jbChangePass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addComponent(jLabel1)
+                    .addComponent(jlSettingsPayMethod)
                     .addComponent(jbSettingsPayMethod))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
@@ -281,7 +281,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                     .addComponent(jlSettingsFName)
                     .addComponent(jtfSettingsFName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
-                .addComponent(jLabel1)
+                .addComponent(jlSettingsPayMethod)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jbSettingsPayMethod)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
@@ -466,7 +466,6 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
     private javax.swing.JPanel accSettingsPanel;
     private javax.swing.JPanel createAccountPanel;
     private javax.swing.JPanel homePanel;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JButton jbAccSettings;
     private javax.swing.JButton jbChangePass;
@@ -491,6 +490,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
     private javax.swing.JLabel jlSettingsCPass;
     private javax.swing.JLabel jlSettingsFName;
     private javax.swing.JLabel jlSettingsNPass;
+    private javax.swing.JLabel jlSettingsPayMethod;
     private javax.swing.JLabel jlSettingsUName;
     private javax.swing.JLabel jlUName;
     private javax.swing.JLabel jlUsername;
@@ -513,6 +513,10 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
         // Take in an Output object, update the view based on Output.action.
         Output argument = (Output) arg;
         switch (argument.action) {
+            case Output.BACK_TO_HOME:
+                setContentPane(homePanel);
+                setSize(homePanel.getPreferredSize());
+                break;
             case Output.CREATE_ACCOUNT:
                 setContentPane(createAccountPanel);
                 setSize(createAccountPanel.getPreferredSize());
@@ -558,6 +562,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
             case Output.VIEW_ACCOUNT_SETTINGS:
                 jtfSettingsUName.setText(argument.outputString1);
                 jtfSettingsFName.setText(argument.outputString2);
+                jlSettingsPayMethod.setText(argument.outputString3);
                 setContentPane(accSettingsPanel);
                 setSize(accSettingsPanel.getPreferredSize());
                 break;

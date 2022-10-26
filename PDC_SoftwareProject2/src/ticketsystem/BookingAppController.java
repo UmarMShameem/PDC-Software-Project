@@ -59,6 +59,9 @@ public class BookingAppController implements ActionListener  {
             case "Account Settings":
                 this.model.viewAccountSettings();
                 break;
+            case "Back to main menu":
+                this.model.backToHome();
+                break;
         }
     }
     
