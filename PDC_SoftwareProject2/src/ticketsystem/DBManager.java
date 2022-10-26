@@ -35,6 +35,17 @@ public abstract class DBManager {
         }
     }
     
+    public void closeConnection() {
+        if (connection != null) {
+            try {
+                connection.close();
+            } 
+            catch (SQLException ex) {
+                Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
     // Returns Statement object from this connection. Statement is used to execute queries and updates.
     public final Statement getStatement() {
         try {
