@@ -50,6 +50,22 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
         jbMembership = new javax.swing.JButton();
         jbAccSettings = new javax.swing.JButton();
         jbLogOut = new javax.swing.JButton();
+        accSettingsPanel = new javax.swing.JPanel();
+        jlSettingsUName = new javax.swing.JLabel();
+        jlSettingsFName = new javax.swing.JLabel();
+        jlChangePass = new javax.swing.JLabel();
+        jlSettingsNPass = new javax.swing.JLabel();
+        jlSettingsCNPass = new javax.swing.JLabel();
+        jlSettingsCPass = new javax.swing.JLabel();
+        jtfSettingsUName = new javax.swing.JTextField();
+        jtfSettingsFName = new javax.swing.JTextField();
+        jbChangePass = new javax.swing.JButton();
+        jpfSettingsCPass = new javax.swing.JPasswordField();
+        jpfSettingsNPass = new javax.swing.JPasswordField();
+        jpfSettingsCNPass = new javax.swing.JPasswordField();
+        jbSettingsBack = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jbSettingsPayMethod = new javax.swing.JButton();
         loginPanel = new javax.swing.JPanel();
         jtfUsername = new javax.swing.JTextField();
         jlUsername = new javax.swing.JLabel();
@@ -191,6 +207,104 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 .addContainerGap(54, Short.MAX_VALUE))
         );
 
+        jlSettingsUName.setText("Username");
+
+        jlSettingsFName.setText("Full name");
+
+        jlChangePass.setText("Change password");
+
+        jlSettingsNPass.setText("New password");
+
+        jlSettingsCNPass.setText("Confirm new password");
+
+        jlSettingsCPass.setText("Current password");
+
+        jtfSettingsUName.setEditable(false);
+
+        jtfSettingsFName.setEditable(false);
+
+        jbChangePass.setText("Change password");
+
+        jbSettingsBack.setText("Back to main menu");
+
+        jLabel1.setText("Saved payment method: ");
+
+        jbSettingsPayMethod.setText("Add/Remove Payment Method");
+
+        javax.swing.GroupLayout accSettingsPanelLayout = new javax.swing.GroupLayout(accSettingsPanel);
+        accSettingsPanel.setLayout(accSettingsPanelLayout);
+        accSettingsPanelLayout.setHorizontalGroup(
+            accSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(accSettingsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(accSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(accSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, accSettingsPanelLayout.createSequentialGroup()
+                            .addComponent(jlSettingsUName)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jtfSettingsUName, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, accSettingsPanelLayout.createSequentialGroup()
+                            .addGap(90, 90, 90)
+                            .addComponent(jlChangePass))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, accSettingsPanelLayout.createSequentialGroup()
+                            .addComponent(jlSettingsFName)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jtfSettingsFName, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, accSettingsPanelLayout.createSequentialGroup()
+                            .addGroup(accSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jlSettingsNPass)
+                                .addComponent(jlSettingsCNPass)
+                                .addComponent(jlSettingsCPass))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(accSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jpfSettingsCPass)
+                                .addComponent(jpfSettingsNPass)
+                                .addComponent(jpfSettingsCNPass)))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, accSettingsPanelLayout.createSequentialGroup()
+                            .addGap(74, 74, 74)
+                            .addGroup(accSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jbSettingsBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jbChangePass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jLabel1)
+                    .addComponent(jbSettingsPayMethod))
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+        accSettingsPanelLayout.setVerticalGroup(
+            accSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(accSettingsPanelLayout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addGroup(accSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlSettingsUName)
+                    .addComponent(jtfSettingsUName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(accSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlSettingsFName)
+                    .addComponent(jtfSettingsFName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbSettingsPayMethod)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addComponent(jlChangePass)
+                .addGap(18, 18, 18)
+                .addGroup(accSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlSettingsCPass)
+                    .addComponent(jpfSettingsCPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(accSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlSettingsNPass)
+                    .addComponent(jpfSettingsNPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(accSettingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlSettingsCNPass)
+                    .addComponent(jpfSettingsCNPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jbChangePass)
+                .addGap(18, 18, 18)
+                .addComponent(jbSettingsBack)
+                .addGap(14, 14, 14))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
@@ -209,7 +323,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
 
         jLabel4.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Ferry Booking App");
+        jLabel4.setText("Book A Ferry");
 
         jlInvalidPassword.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
@@ -307,6 +421,11 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
         jbMembership.addActionListener(al);
         jbAccSettings.addActionListener(al);
         jbLogOut.addActionListener(al);
+        
+        // Add action listener to accSettingsPanel buttons.
+        jbChangePass.addActionListener(al);
+        jbSettingsBack.addActionListener(al);
+        jbSettingsPayMethod.addActionListener(al);
     }
     /**
      * @param args the command line arguments
@@ -344,17 +463,23 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel accSettingsPanel;
     private javax.swing.JPanel createAccountPanel;
     private javax.swing.JPanel homePanel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JButton jbAccSettings;
+    private javax.swing.JButton jbChangePass;
     private javax.swing.JButton jbConfirm;
     private javax.swing.JButton jbCreateAccount;
     private javax.swing.JButton jbCreateBooking;
     private javax.swing.JButton jbLogOut;
     private javax.swing.JButton jbLogin;
     private javax.swing.JButton jbMembership;
+    private javax.swing.JButton jbSettingsBack;
+    private javax.swing.JButton jbSettingsPayMethod;
     private javax.swing.JButton jbViewBookings;
+    private javax.swing.JLabel jlChangePass;
     private javax.swing.JLabel jlConfirmPass;
     private javax.swing.JLabel jlCurrentUser;
     private javax.swing.JLabel jlFName;
@@ -362,12 +487,22 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
     private javax.swing.JLabel jlInvalidPassword;
     private javax.swing.JLabel jlNewPass;
     private javax.swing.JLabel jlPassword;
+    private javax.swing.JLabel jlSettingsCNPass;
+    private javax.swing.JLabel jlSettingsCPass;
+    private javax.swing.JLabel jlSettingsFName;
+    private javax.swing.JLabel jlSettingsNPass;
+    private javax.swing.JLabel jlSettingsUName;
     private javax.swing.JLabel jlUName;
     private javax.swing.JLabel jlUsername;
+    public javax.swing.JPasswordField jpfSettingsCNPass;
+    public javax.swing.JPasswordField jpfSettingsCPass;
+    public javax.swing.JPasswordField jpfSettingsNPass;
     public javax.swing.JPasswordField jtfConfirmPass;
     public javax.swing.JTextField jtfFName;
     public javax.swing.JPasswordField jtfNewPass;
     public javax.swing.JPasswordField jtfPassword;
+    private javax.swing.JTextField jtfSettingsFName;
+    private javax.swing.JTextField jtfSettingsUName;
     public javax.swing.JTextField jtfUName;
     public javax.swing.JTextField jtfUsername;
     private javax.swing.JPanel loginPanel;
@@ -384,7 +519,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 break;
             case Output.CREATE_ACCOUNT_SUCCESS:
                 JOptionPane.showMessageDialog(null, "Your account has successfully been created.", "Success", JOptionPane.PLAIN_MESSAGE);
-                jlCurrentUser.setText("Signed in as: "+argument.outputString);
+                jlCurrentUser.setText("Signed in as: "+argument.outputString1);
                 setContentPane(homePanel);
                 setSize(homePanel.getPreferredSize());
                 break;
@@ -404,7 +539,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 JOptionPane.showMessageDialog(null, "Username must be 5 to 15 characters in length and must not contain spaces.", "Error", JOptionPane.ERROR_MESSAGE);
                 break;
             case Output.LOG_IN_SUCCESS:
-                jlCurrentUser.setText("Signed in as: "+argument.outputString);
+                jlCurrentUser.setText("Signed in as: "+argument.outputString1);
                 jtfPassword.setText("");
                 jlInvalidPassword.setText("");
                 setContentPane(homePanel);
@@ -419,6 +554,12 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 break;
             case Output.USERNAME_EXISTS:
                 JOptionPane.showMessageDialog(null, "The username you entered is already in use.", "Error", JOptionPane.ERROR_MESSAGE);
+                break;
+            case Output.VIEW_ACCOUNT_SETTINGS:
+                jtfSettingsUName.setText(argument.outputString1);
+                jtfSettingsFName.setText(argument.outputString2);
+                setContentPane(accSettingsPanel);
+                setSize(accSettingsPanel.getPreferredSize());
                 break;
         }
     }

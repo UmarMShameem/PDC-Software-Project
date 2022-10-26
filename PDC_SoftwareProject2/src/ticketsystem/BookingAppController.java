@@ -56,6 +56,9 @@ public class BookingAppController implements ActionListener  {
                 // Send the user back to the login screen.
                 this.model.logOut();
                 break;
+            case "Account Settings":
+                this.model.viewAccountSettings();
+                break;
         }
     }
     

@@ -35,7 +35,23 @@ public class BookingAppModel extends Observable {
         currentUser = new User(username, password, fullname);
         userDB.saveUser(currentUser);
         output.action = Output.CREATE_ACCOUNT_SUCCESS;
-        output.outputString = currentUser.getUsername();
+        output.outputString1 = currentUser.getUsername();
+        this.setChanged();
+        this.notifyObservers(output);
+    }
+    
+    public void closeDBConnections() {
+        userDB.closeConnection();
+        memberDB.closeConnection();
+        ticketDB.closeConnection();
+        payDB.closeConnection();
+        menuDB.closeConnection();
+    }
+    
+    public void viewAccountSettings() {
+        output.action = Output.VIEW_ACCOUNT_SETTINGS;
+        output.outputString1 = currentUser.getUsername();
+        output.outputString2 = currentUser.getFullname();
         this.setChanged();
         this.notifyObservers(output);
     }
@@ -119,7 +135,7 @@ public class BookingAppModel extends Observable {
             currentUser = memberDB.loadMember(username);
         }
         output.action = Output.LOG_IN_SUCCESS;
-        output.outputString = currentUser.getUsername();
+        output.outputString1 = currentUser.getUsername();
         this.setChanged();
         this.notifyObservers(output);
     }
