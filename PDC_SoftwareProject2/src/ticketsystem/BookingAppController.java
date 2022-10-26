@@ -21,7 +21,7 @@ public class BookingAppController implements ActionListener  {
                 this.model.createAccount();
                 break;
             case "Login":
-                // Password is retrieved from passowrd field as a char[], so read characters into a String.
+                // Password is retrieved from password field as a char[], so read characters into a String.
                 String username = this.view.jtfUsername.getText();
                 String password = "";
                 for (char c: this.view.jtfPassword.getPassword()) {
@@ -33,9 +33,11 @@ public class BookingAppController implements ActionListener  {
                 }
                 break;
             case "Confirm & Create Account":
+                // Get user information, check if valid, create account
                 String newUsername = this.view.jtfUName.getText();
                 String fullName = this.view.jtfFName.getText();
                 
+                // Convert newPassword and confirmPassword fields to strings.
                 String newPassword = "";
                 for (char c: this.view.jtfNewPass.getPassword()) {
                     newPassword += c;
@@ -49,6 +51,10 @@ public class BookingAppController implements ActionListener  {
                 if (this.model.validAccountDetails(newUsername, fullName, newPassword, confirmPassword)) {
                     this.model.confirmCreateAccount(newUsername, fullName, newPassword);
                 }
+                break;
+            case "Log out":
+                // Send the user back to the login screen.
+                this.model.logOut();
                 break;
         }
     }

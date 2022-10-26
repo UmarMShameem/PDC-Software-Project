@@ -45,11 +45,11 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
         jlHeader = new javax.swing.JLabel();
         homePanel = new javax.swing.JPanel();
         jlCurrentUser = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jbCreateBooking = new javax.swing.JButton();
+        jbViewBookings = new javax.swing.JButton();
+        jbMembership = new javax.swing.JButton();
+        jbAccSettings = new javax.swing.JButton();
+        jbLogOut = new javax.swing.JButton();
         loginPanel = new javax.swing.JPanel();
         jtfUsername = new javax.swing.JTextField();
         jlUsername = new javax.swing.JLabel();
@@ -142,15 +142,15 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
 
         jlCurrentUser.setText("Signed in as: ");
 
-        jButton1.setText("Create a Booking");
+        jbCreateBooking.setText("Create a Booking");
 
-        jButton2.setText("View Bookings");
+        jbViewBookings.setText("View Bookings");
 
-        jButton3.setText("Membership");
+        jbMembership.setText("Membership");
 
-        jButton4.setText("Account Settings");
+        jbAccSettings.setText("Account Settings");
 
-        jButton5.setText("Log out");
+        jbLogOut.setText("Log out");
 
         javax.swing.GroupLayout homePanelLayout = new javax.swing.GroupLayout(homePanel);
         homePanel.setLayout(homePanelLayout);
@@ -163,31 +163,31 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                         .addComponent(jlCurrentUser))
                     .addGroup(homePanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton5))
+                        .addComponent(jbLogOut))
                     .addGroup(homePanelLayout.createSequentialGroup()
                         .addGap(68, 68, 68)
                         .addGroup(homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jbViewBookings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbCreateBooking, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbAccSettings, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbMembership, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(88, Short.MAX_VALUE))
         );
         homePanelLayout.setVerticalGroup(
             homePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homePanelLayout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addComponent(jButton1)
+                .addComponent(jbCreateBooking)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(jbViewBookings)
                 .addGap(108, 108, 108)
-                .addComponent(jButton3)
+                .addComponent(jbMembership)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
+                .addComponent(jbAccSettings)
                 .addGap(60, 60, 60)
                 .addComponent(jlCurrentUser)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5)
+                .addComponent(jbLogOut)
                 .addContainerGap(54, Short.MAX_VALUE))
         );
 
@@ -296,9 +296,17 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
     }//GEN-LAST:event_jtfUNameActionPerformed
 
     public void addActionListener(ActionListener al) {
+        // Add action listeners to login/createAccount panel buttons.
         jbLogin.addActionListener(al);
         jbCreateAccount.addActionListener(al);
         jbConfirm.addActionListener(al);
+        
+        // Add action listeners to home panel buttons.
+        jbCreateBooking.addActionListener(al);
+        jbViewBookings.addActionListener(al);
+        jbMembership.addActionListener(al);
+        jbAccSettings.addActionListener(al);
+        jbLogOut.addActionListener(al);
     }
     /**
      * @param args the command line arguments
@@ -338,15 +346,15 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel createAccountPanel;
     private javax.swing.JPanel homePanel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JButton jbAccSettings;
     private javax.swing.JButton jbConfirm;
     private javax.swing.JButton jbCreateAccount;
+    private javax.swing.JButton jbCreateBooking;
+    private javax.swing.JButton jbLogOut;
     private javax.swing.JButton jbLogin;
+    private javax.swing.JButton jbMembership;
+    private javax.swing.JButton jbViewBookings;
     private javax.swing.JLabel jlConfirmPass;
     private javax.swing.JLabel jlCurrentUser;
     private javax.swing.JLabel jlFName;
@@ -367,6 +375,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
+        // Take in an Output object, update the view based on Output.action.
         Output argument = (Output) arg;
         switch (argument.action) {
             case Output.CREATE_ACCOUNT:
@@ -396,8 +405,14 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 break;
             case Output.LOG_IN_SUCCESS:
                 jlCurrentUser.setText("Signed in as: "+argument.outputString);
+                jtfPassword.setText("");
+                jlInvalidPassword.setText("");
                 setContentPane(homePanel);
                 setSize(homePanel.getPreferredSize());
+                break;
+            case Output.LOG_OUT:
+                setContentPane(loginPanel);
+                setSize(loginPanel.getPreferredSize());
                 break;
             case Output.NEW_PASSWORD_MISMATCH:
                 JOptionPane.showMessageDialog(null, "Passwords do not match.", "Error", JOptionPane.ERROR_MESSAGE);

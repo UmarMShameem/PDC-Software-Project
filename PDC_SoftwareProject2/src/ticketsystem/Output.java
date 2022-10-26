@@ -9,9 +9,12 @@ public class Output {
     public static final int INVALID_NEW_PASSWORD = 5;
     public static final int INVALID_USERNAME = 6;
     public static final int LOG_IN_SUCCESS = 7;
-    public static final int NEW_PASSWORD_MISMATCH = 8;
-    public static final int USERNAME_EXISTS = 9;
+    public static final int LOG_OUT = 8;
+    public static final int NEW_PASSWORD_MISMATCH = 9;
+    public static final int USERNAME_EXISTS = 10;
     
+    // BookingAppModel will take an Output object with an action and 
+    // output string to notify the View.
     String outputString;
     int action;
 }

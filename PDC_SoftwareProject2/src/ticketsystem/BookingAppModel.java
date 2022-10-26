@@ -29,6 +29,8 @@ public class BookingAppModel extends Observable {
         this.notifyObservers(output);
     }
     
+    // Create a new User account, save details to the USERS table, notify View that an account has
+    // been created.
     public void confirmCreateAccount(String username, String fullname, String password) {
         currentUser = new User(username, password, fullname);
         userDB.saveUser(currentUser);
@@ -36,7 +38,14 @@ public class BookingAppModel extends Observable {
         output.outputString = currentUser.getUsername();
         this.setChanged();
         this.notifyObservers(output);
-        output.outputString = null;
+    }
+    
+    // Sign the user out, notify the View to send the user back to the login screen.
+    public void logOut() {
+        currentUser = null;
+        output.action = Output.LOG_OUT;
+        this.setChanged();
+        this.notifyObservers(output);
     }
     
     // Confirm whether the user input is valid.
@@ -113,6 +122,5 @@ public class BookingAppModel extends Observable {
         output.outputString = currentUser.getUsername();
         this.setChanged();
         this.notifyObservers(output);
-        output.outputString = null;
     }
 }
