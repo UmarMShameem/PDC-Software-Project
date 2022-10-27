@@ -50,8 +50,14 @@ public class MemberDB extends DBManager {
         }
     }
     
-    public void updatePayAccount(Member member, PayAcc payAccount) {
-        String paUpdate = "UPDATE MEMBERS SET PA_EMAIL = '"+payAccount.getEmail()+"' WHERE USERNAME = '"+member.getUsername()+"'";
+    public void updatePayAccount(Member member) {
+        String paUpdate = "";
+        if (member.getPayAccount() == null) {
+            paUpdate = "UPDATE MEMBERS SET PA_EMAIL = null WHERE USERNAME = '"+member.getUsername()+"'";
+        }
+        else {
+            paUpdate = "UPDATE MEMBERS SET PA_EMAIL = '"+member.getPayAccount().getEmail()+"' WHERE USERNAME = '"+member.getUsername()+"'";
+        }
         try {
             statement.executeUpdate(paUpdate);
         } 

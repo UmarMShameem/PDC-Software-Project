@@ -45,8 +45,14 @@ public final class UserDB extends DBManager {
         }
     }
     
-    public void updatePayAccount(User user, PayAcc payAccount) {
-        String paUpdate = "UPDATE USERS SET PA_EMAIL = '"+payAccount.getEmail()+"' WHERE USERNAME = '"+user.getUsername()+"'";
+    public void updatePayAccount(User user) {
+        String paUpdate = "";
+        if (user.getPayAccount() == null) {
+            paUpdate = "UPDATE USERS SET PA_EMAIL = null WHERE USERNAME = '"+user.getUsername()+"'";
+        }
+        else {
+            paUpdate = "UPDATE USERS SET PA_EMAIL = '"+user.getPayAccount().getEmail()+"' WHERE USERNAME = '"+user.getUsername()+"'";
+        }
         try {
             statement.executeUpdate(paUpdate);
         } 

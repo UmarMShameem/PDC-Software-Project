@@ -19,9 +19,10 @@ public class Output {
     public static final int NEW_PASSWORD_MISMATCH = 15;
     public static final int PA_IN_USE = 16;
     public static final int REMOVE_PAY_ACCOUNT = 17;
-    public static final int USERNAME_EXISTS = 18;
-    public static final int VIEW_ACCOUNT_SETTINGS = 19;
-    public static final int WRONG_CURRENT_PASSWORD = 20;
+    public static final int REMOVE_PAY_ACCOUNT_SUCCESS = 18;
+    public static final int USERNAME_EXISTS = 19;
+    public static final int VIEW_ACCOUNT_SETTINGS = 20;
+    public static final int WRONG_CURRENT_PASSWORD = 21;
     
     // BookingAppModel will take an Output object with an action and 
     // output strings to notify the View.

@@ -39,10 +39,10 @@ public class BookingAppModel extends Observable {
             currentUser.setPayAccount(payAccount);
             payDB.savePayAcc(payAccount);
             if (!(currentUser instanceof Member)) {
-                userDB.updatePayAccount(currentUser, payAccount);
+                userDB.updatePayAccount(currentUser);
             }
             else {
-                memberDB.updatePayAccount((Member) currentUser, payAccount);
+                memberDB.updatePayAccount((Member) currentUser);
             }
         }
         this.setChanged();
@@ -138,6 +138,20 @@ public class BookingAppModel extends Observable {
         else {
             output.action = Output.REMOVE_PAY_ACCOUNT;
         }
+        this.setChanged();
+        this.notifyObservers(output);
+    }
+    
+    public void removePayAccount() {
+        payDB.deletePayAcc(currentUser.getPayAccount());
+        currentUser.setPayAccount(null);
+        if (currentUser instanceof Member) {
+            memberDB.updatePayAccount((Member) currentUser);
+        }
+        else {
+            userDB.updatePayAccount(currentUser);
+        }
+        output.action = Output.REMOVE_PAY_ACCOUNT_SUCCESS;
         this.setChanged();
         this.notifyObservers(output);
     }

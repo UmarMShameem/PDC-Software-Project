@@ -87,6 +87,12 @@ public class BookingAppController implements ActionListener  {
             case "Add/Remove Payment Method":
                 this.model.managePayAccount();
                 break;
+            case "Yes":
+                this.model.removePayAccount();
+                break;
+            case "No":
+                this.model.viewAccountSettings();
+                break;
         }
     }
     

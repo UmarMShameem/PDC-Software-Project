@@ -4,6 +4,7 @@
  */
 package ticketsystem;
 
+import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.Observer;
@@ -74,7 +75,10 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
         jtfPAEmail = new javax.swing.JTextField();
         jbAddPayAcc = new javax.swing.JButton();
         jbBackToSettings = new javax.swing.JButton();
-        jOptionPane1 = new javax.swing.JOptionPane();
+        removePayAccountPanel = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jbRemovePA = new javax.swing.JButton();
+        jbCancelRemovePA = new javax.swing.JButton();
         loginPanel = new javax.swing.JPanel();
         jtfUsername = new javax.swing.JTextField();
         jlUsername = new javax.swing.JLabel();
@@ -323,6 +327,11 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
         jbAddPayAcc.setText("Add Pay account");
 
         jbBackToSettings.setText("Back to account settings");
+        jbBackToSettings.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBackToSettingsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout addPayAccountPanelLayout = new javax.swing.GroupLayout(addPayAccountPanel);
         addPayAccountPanel.setLayout(addPayAccountPanelLayout);
@@ -370,8 +379,40 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 .addContainerGap(57, Short.MAX_VALUE))
         );
 
-        jOptionPane1.setMessage("Remove your saved Pay account?");
-        jOptionPane1.setOptionType(JOptionPane.YES_NO_OPTION);
+        removePayAccountPanel.setPreferredSize(new java.awt.Dimension(304, 130));
+
+        jLabel5.setText("Remove your saved Pay account?");
+
+        jbRemovePA.setText("Yes");
+
+        jbCancelRemovePA.setText("No");
+
+        javax.swing.GroupLayout removePayAccountPanelLayout = new javax.swing.GroupLayout(removePayAccountPanel);
+        removePayAccountPanel.setLayout(removePayAccountPanelLayout);
+        removePayAccountPanelLayout.setHorizontalGroup(
+            removePayAccountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(removePayAccountPanelLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel5)
+                .addContainerGap(114, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, removePayAccountPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbRemovePA)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbCancelRemovePA)
+                .addGap(17, 17, 17))
+        );
+        removePayAccountPanelLayout.setVerticalGroup(
+            removePayAccountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(removePayAccountPanelLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(removePayAccountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbRemovePA)
+                    .addComponent(jbCancelRemovePA))
+                .addContainerGap(54, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -477,6 +518,10 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfUNameActionPerformed
 
+    private void jbBackToSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBackToSettingsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbBackToSettingsActionPerformed
+
     public void addActionListener(ActionListener al) {
         // Add action listeners to login/createAccount panel buttons.
         jbLogin.addActionListener(al);
@@ -498,6 +543,9 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
         // Add action listener to addPayAccountPanel buttons.
         jbAddPayAcc.addActionListener(al);
         jbBackToSettings.addActionListener(al);
+        
+        jbRemovePA.addActionListener(al);
+        jbCancelRemovePA.addActionListener(al);
     }
     /**
      * @param args the command line arguments
@@ -543,10 +591,11 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JOptionPane jOptionPane1;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JButton jbAccSettings;
     private javax.swing.JButton jbAddPayAcc;
     private javax.swing.JButton jbBackToSettings;
+    private javax.swing.JButton jbCancelRemovePA;
     private javax.swing.JButton jbChangePass;
     private javax.swing.JButton jbConfirm;
     private javax.swing.JButton jbCreateAccount;
@@ -554,6 +603,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
     private javax.swing.JButton jbLogOut;
     private javax.swing.JButton jbLogin;
     private javax.swing.JButton jbMembership;
+    private javax.swing.JButton jbRemovePA;
     private javax.swing.JButton jbSettingsBack;
     private javax.swing.JButton jbSettingsPayMethod;
     private javax.swing.JButton jbViewBookings;
@@ -587,6 +637,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
     public javax.swing.JTextField jtfUName;
     public javax.swing.JTextField jtfUsername;
     private javax.swing.JPanel loginPanel;
+    private javax.swing.JPanel removePayAccountPanel;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -665,7 +716,15 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 JOptionPane.showMessageDialog(null, "This Pay account is already in use.", "Error", JOptionPane.ERROR_MESSAGE);
                 break;
             case Output.REMOVE_PAY_ACCOUNT:
-                // TODO: Prompt the user to remove their Pay account.
+                // Prompt the user to remove their Pay account.
+                setContentPane(removePayAccountPanel);
+                setSize(removePayAccountPanel.getPreferredSize());
+                break;
+            case Output.REMOVE_PAY_ACCOUNT_SUCCESS:
+                JOptionPane.showMessageDialog(null, "Your Pay account has been removed.", "Success", JOptionPane.PLAIN_MESSAGE);
+                jlSettingsPayMethod.setText("No payment method saved.");
+                setContentPane(accSettingsPanel);
+                setSize(accSettingsPanel.getPreferredSize());
                 break;
             case Output.USERNAME_EXISTS:
                 JOptionPane.showMessageDialog(null, "The username you entered is already in use.", "Error", JOptionPane.ERROR_MESSAGE);

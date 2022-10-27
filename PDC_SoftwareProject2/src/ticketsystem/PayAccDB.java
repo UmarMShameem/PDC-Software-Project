@@ -25,6 +25,16 @@ public class PayAccDB extends DBManager {
         return false;
     }
     
+    public void deletePayAcc(PayAcc payAccount) {
+        String payAccDelete = "DELETE FROM PAY_ACCOUNTS WHERE PA_EMAIL = '"+payAccount.getEmail()+"'";
+        try {
+            statement.executeUpdate(payAccDelete);
+        } 
+        catch (SQLException ex) {
+            Logger.getLogger(PayAccDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public PayAcc loadPayAcc(String email) {
         String sqlQuery = "SELECT * FROM PAY_ACCOUNTS WHERE PA_EMAIL='"+email+"'";
         try {
