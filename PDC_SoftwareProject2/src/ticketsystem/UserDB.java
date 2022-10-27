@@ -44,6 +44,16 @@ public final class UserDB extends DBManager {
             Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public void updatePayAccount(User user, PayAcc payAccount) {
+        String paUpdate = "UPDATE USERS SET PA_EMAIL = '"+payAccount.getEmail()+"' WHERE USERNAME = '"+user.getUsername()+"'";
+        try {
+            statement.executeUpdate(paUpdate);
+        } 
+        catch (SQLException ex) {
+            Logger.getLogger(UserDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
 // Finds a row in the USERS table matching username, returns User object with data from that row.
     public User loadUser(String username) {

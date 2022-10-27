@@ -50,6 +50,16 @@ public class MemberDB extends DBManager {
         }
     }
     
+    public void updatePayAccount(Member member, PayAcc payAccount) {
+        String paUpdate = "UPDATE MEMBERS SET PA_EMAIL = '"+payAccount.getEmail()+"' WHERE USERNAME = '"+member.getUsername()+"'";
+        try {
+            statement.executeUpdate(paUpdate);
+        } 
+        catch (SQLException ex) {
+            Logger.getLogger(MemberDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     public void changePassword(Member member, String newPassword) {
         String passwordUpdate = "UPDATE MEMBERS SET PASSWORD = '"+newPassword+"' WHERE USERNAME = '"+member.getUsername()+"'";
         try {

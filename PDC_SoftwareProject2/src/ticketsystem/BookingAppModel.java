@@ -21,6 +21,31 @@ public class BookingAppModel extends Observable {
         
         output = new Output();
     }
+    
+    public void addPayAccount(String email, String password) {
+        if (payDB.containsPayAcc(email)) {
+            output.action = Output.PA_IN_USE;
+        }
+        else if (!(email.contains("@") && email.contains(".") && email.length() > 5)) {
+            output.action = Output.INVALID_PA_EMAIL;
+        }
+        else if (password.length() < 8 || password.length() > 20) {
+            output.action = Output.INVALID_PA_PASSWORD;
+        }
+        else {
+            output.action = Output.ADD_PAY_ACCOUNT;
+            PayAcc payAccount = new PayAcc(email, password);
+            payDB.savePayAcc(payAccount);
+            if (!(currentUser instanceof Member)) {
+                userDB.updatePayAccount(currentUser, payAccount);
+            }
+            else {
+                memberDB.updatePayAccount((Member) currentUser, payAccount);
+            }
+        }
+        this.setChanged();
+        this.notifyObservers(output);
+    }
 
     public void backToHome() {
         output.action = Output.BACK_TO_HOME;

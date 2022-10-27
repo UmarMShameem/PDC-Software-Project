@@ -11,6 +11,20 @@ public class PayAccDB extends DBManager {
         createTable();
     }
 
+    public boolean containsPayAcc(String email) {
+        String sqlQuery = "SELECT * FROM PAY_ACCOUNTS WHERE PA_EMAIL='"+email+"'";
+        try {
+            ResultSet rs = statement.executeQuery(sqlQuery);
+            if (rs.next()) {
+                return true;
+            }
+        } 
+        catch (SQLException ex) {
+            Logger.getLogger(PayAccDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
     public PayAcc loadPayAcc(String email) {
         String sqlQuery = "SELECT * FROM PAY_ACCOUNTS WHERE PA_EMAIL='"+email+"'";
         try {

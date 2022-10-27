@@ -70,7 +70,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        jpfPAPassword = new javax.swing.JPasswordField();
         jtfPAEmail = new javax.swing.JTextField();
         jbAddPayAcc = new javax.swing.JButton();
         jbBackToSettings = new javax.swing.JButton();
@@ -346,7 +346,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                         .addGap(28, 28, 28)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jpfPAPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         addPayAccountPanelLayout.setVerticalGroup(
@@ -361,7 +361,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 .addGap(25, 25, 25)
                 .addGroup(addPayAccountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jpfPAPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addComponent(jbAddPayAcc)
                 .addGap(18, 18, 18)
@@ -539,7 +539,6 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JButton jbAccSettings;
     private javax.swing.JButton jbAddPayAcc;
     private javax.swing.JButton jbBackToSettings;
@@ -569,6 +568,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
     private javax.swing.JLabel jlSettingsUName;
     private javax.swing.JLabel jlUName;
     private javax.swing.JLabel jlUsername;
+    public javax.swing.JPasswordField jpfPAPassword;
     public javax.swing.JPasswordField jpfSettingsCNPass;
     public javax.swing.JPasswordField jpfSettingsCPass;
     public javax.swing.JPasswordField jpfSettingsNPass;
