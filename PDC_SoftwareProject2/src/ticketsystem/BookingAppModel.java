@@ -33,8 +33,10 @@ public class BookingAppModel extends Observable {
             output.action = Output.INVALID_PA_PASSWORD;
         }
         else {
-            output.action = Output.ADD_PAY_ACCOUNT;
+            output.action = Output.ADD_PAY_ACCOUNT_SUCCESS;
+            output.outputString1 = email;
             PayAcc payAccount = new PayAcc(email, password);
+            currentUser.setPayAccount(payAccount);
             payDB.savePayAcc(payAccount);
             if (!(currentUser instanceof Member)) {
                 userDB.updatePayAccount(currentUser, payAccount);
@@ -125,6 +127,17 @@ public class BookingAppModel extends Observable {
     public void logOut() {
         currentUser = null;
         output.action = Output.LOG_OUT;
+        this.setChanged();
+        this.notifyObservers(output);
+    }
+    
+    public void managePayAccount() {
+        if (currentUser.getPayAccount() == null) {
+            output.action = Output.ADD_PAY_ACCOUNT;
+        }
+        else {
+            output.action = Output.REMOVE_PAY_ACCOUNT;
+        }
         this.setChanged();
         this.notifyObservers(output);
     }

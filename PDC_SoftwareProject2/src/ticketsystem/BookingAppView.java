@@ -74,6 +74,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
         jtfPAEmail = new javax.swing.JTextField();
         jbAddPayAcc = new javax.swing.JButton();
         jbBackToSettings = new javax.swing.JButton();
+        jOptionPane1 = new javax.swing.JOptionPane();
         loginPanel = new javax.swing.JPanel();
         jtfUsername = new javax.swing.JTextField();
         jlUsername = new javax.swing.JLabel();
@@ -369,6 +370,9 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 .addContainerGap(57, Short.MAX_VALUE))
         );
 
+        jOptionPane1.setMessage("Remove your saved Pay account?");
+        jOptionPane1.setOptionType(JOptionPane.YES_NO_OPTION);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
@@ -539,6 +543,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JButton jbAccSettings;
     private javax.swing.JButton jbAddPayAcc;
     private javax.swing.JButton jbBackToSettings;
@@ -589,6 +594,18 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
         // Take in an Output object, update the view based on Output.action.
         Output argument = (Output) arg;
         switch (argument.action) {
+            case Output.ADD_PAY_ACCOUNT:
+                jtfPAEmail.setText("");
+                jpfPAPassword.setText("");
+                setContentPane(addPayAccountPanel);
+                setSize(addPayAccountPanel.getPreferredSize());
+                break;
+            case Output.ADD_PAY_ACCOUNT_SUCCESS:
+                JOptionPane.showMessageDialog(null, "Your Pay account has been added.", "Success", JOptionPane.PLAIN_MESSAGE);
+                jlSettingsPayMethod.setText("Saved payment method: "+argument.outputString1);
+                setContentPane(accSettingsPanel);
+                setSize(accSettingsPanel.getPreferredSize());
+                break;
             case Output.BACK_TO_HOME:
                 setContentPane(homePanel);
                 setSize(homePanel.getPreferredSize());
@@ -621,6 +638,12 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
             case Output.INVALID_NEW_PASSWORD:
                 JOptionPane.showMessageDialog(null, "Passwords must be 8 to 20 characters in length and must not contain spaces.", "Error", JOptionPane.ERROR_MESSAGE);
                 break;
+            case Output.INVALID_PA_EMAIL:
+                JOptionPane.showMessageDialog(null, "Please enter a valid email address.", "Error", JOptionPane.ERROR_MESSAGE);
+                break;
+            case Output.INVALID_PA_PASSWORD:
+                JOptionPane.showMessageDialog(null, "Please enter a valid password. (Min. 8 characters, max. 20 characters)", "Error", JOptionPane.ERROR_MESSAGE);
+                break;
             case Output.INVALID_USERNAME:
                 JOptionPane.showMessageDialog(null, "Username must be 5 to 15 characters in length and must not contain spaces.", "Error", JOptionPane.ERROR_MESSAGE);
                 break;
@@ -637,6 +660,12 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 break;
             case Output.NEW_PASSWORD_MISMATCH:
                 JOptionPane.showMessageDialog(null, "Passwords do not match.", "Error", JOptionPane.ERROR_MESSAGE);
+                break;
+            case Output.PA_IN_USE:
+                JOptionPane.showMessageDialog(null, "This Pay account is already in use.", "Error", JOptionPane.ERROR_MESSAGE);
+                break;
+            case Output.REMOVE_PAY_ACCOUNT:
+                // TODO: Prompt the user to remove their Pay account.
                 break;
             case Output.USERNAME_EXISTS:
                 JOptionPane.showMessageDialog(null, "The username you entered is already in use.", "Error", JOptionPane.ERROR_MESSAGE);

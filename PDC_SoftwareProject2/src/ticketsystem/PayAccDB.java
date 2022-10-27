@@ -52,7 +52,7 @@ public class PayAccDB extends DBManager {
     @Override
     public void createTable() {
         if (!this.containsTable("PAY_ACCOUNTS")) {
-            String payAccCreate = "CREATE TABLE PAY_ACCOUNTS(PA_EMAIL VARCHAR(20), PA_PASSWORD VARCHAR(20))";
+            String payAccCreate = "CREATE TABLE PAY_ACCOUNTS(PA_EMAIL VARCHAR(30), PA_PASSWORD VARCHAR(20))";
             try {
                 statement.executeUpdate(payAccCreate);
             } 

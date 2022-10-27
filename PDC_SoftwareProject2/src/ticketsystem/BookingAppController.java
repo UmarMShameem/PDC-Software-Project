@@ -77,6 +77,16 @@ public class BookingAppController implements ActionListener  {
                 }
                 this.model.changePassword(currentPassword, newUserPassword, confirmNewPassword);
                 break;
+            case "Add Pay account":
+                String paPassword = "";
+                for (char c: this.view.jpfPAPassword.getPassword()) {
+                    paPassword += c;
+                }
+                this.model.addPayAccount(this.view.jtfPAEmail.getText(), paPassword);
+                break;
+            case "Add/Remove Payment Method":
+                this.model.managePayAccount();
+                break;
         }
     }
     
