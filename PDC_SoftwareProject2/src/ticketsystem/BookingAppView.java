@@ -66,6 +66,14 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
         jbSettingsBack = new javax.swing.JButton();
         jlSettingsPayMethod = new javax.swing.JLabel();
         jbSettingsPayMethod = new javax.swing.JButton();
+        addPayAccountPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jPasswordField1 = new javax.swing.JPasswordField();
+        jtfPAEmail = new javax.swing.JTextField();
+        jbAddPayAcc = new javax.swing.JButton();
+        jbBackToSettings = new javax.swing.JButton();
         loginPanel = new javax.swing.JPanel();
         jtfUsername = new javax.swing.JTextField();
         jlUsername = new javax.swing.JLabel();
@@ -305,6 +313,62 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 .addGap(14, 14, 14))
         );
 
+        jLabel1.setText("Pay account details");
+
+        jLabel2.setText("Email address");
+
+        jLabel3.setText("Password");
+
+        jbAddPayAcc.setText("Add Pay account");
+
+        jbBackToSettings.setText("Back to account settings");
+
+        javax.swing.GroupLayout addPayAccountPanelLayout = new javax.swing.GroupLayout(addPayAccountPanel);
+        addPayAccountPanel.setLayout(addPayAccountPanelLayout);
+        addPayAccountPanelLayout.setHorizontalGroup(
+            addPayAccountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addPayAccountPanelLayout.createSequentialGroup()
+                .addGroup(addPayAccountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(addPayAccountPanelLayout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addComponent(jLabel1))
+                    .addGroup(addPayAccountPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jtfPAEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(addPayAccountPanelLayout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addGroup(addPayAccountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jbAddPayAcc, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jbBackToSettings)))
+                    .addGroup(addPayAccountPanelLayout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+        addPayAccountPanelLayout.setVerticalGroup(
+            addPayAccountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addPayAccountPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(addPayAccountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jtfPAEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(addPayAccountPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(jbAddPayAcc)
+                .addGap(18, 18, 18)
+                .addComponent(jbBackToSettings)
+                .addContainerGap(57, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
@@ -426,6 +490,10 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
         jbChangePass.addActionListener(al);
         jbSettingsBack.addActionListener(al);
         jbSettingsPayMethod.addActionListener(al);
+        
+        // Add action listener to addPayAccountPanel buttons.
+        jbAddPayAcc.addActionListener(al);
+        jbBackToSettings.addActionListener(al);
     }
     /**
      * @param args the command line arguments
@@ -464,10 +532,17 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel accSettingsPanel;
+    private javax.swing.JPanel addPayAccountPanel;
     private javax.swing.JPanel createAccountPanel;
     private javax.swing.JPanel homePanel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JButton jbAccSettings;
+    private javax.swing.JButton jbAddPayAcc;
+    private javax.swing.JButton jbBackToSettings;
     private javax.swing.JButton jbChangePass;
     private javax.swing.JButton jbConfirm;
     private javax.swing.JButton jbCreateAccount;
@@ -500,6 +575,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
     public javax.swing.JPasswordField jtfConfirmPass;
     public javax.swing.JTextField jtfFName;
     public javax.swing.JPasswordField jtfNewPass;
+    public javax.swing.JTextField jtfPAEmail;
     public javax.swing.JPasswordField jtfPassword;
     private javax.swing.JTextField jtfSettingsFName;
     private javax.swing.JTextField jtfSettingsUName;
@@ -516,6 +592,12 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
             case Output.BACK_TO_HOME:
                 setContentPane(homePanel);
                 setSize(homePanel.getPreferredSize());
+                break;
+            case Output.CHANGE_PASSWORD_SUCCESS:
+                JOptionPane.showMessageDialog(null, "Your password has successfuly been changed.", "Success", JOptionPane.PLAIN_MESSAGE);
+                jpfSettingsCPass.setText("");
+                jpfSettingsNPass.setText("");
+                jpfSettingsCNPass.setText("");
                 break;
             case Output.CREATE_ACCOUNT:
                 setContentPane(createAccountPanel);
@@ -563,8 +645,14 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 jtfSettingsUName.setText(argument.outputString1);
                 jtfSettingsFName.setText(argument.outputString2);
                 jlSettingsPayMethod.setText(argument.outputString3);
+                jpfSettingsCPass.setText("");
+                jpfSettingsNPass.setText("");
+                jpfSettingsCNPass.setText("");
                 setContentPane(accSettingsPanel);
                 setSize(accSettingsPanel.getPreferredSize());
+                break;
+            case Output.WRONG_CURRENT_PASSWORD:
+                JOptionPane.showMessageDialog(null, "The current password you entered does not match your actual current password.", "Error", JOptionPane.ERROR_MESSAGE);
                 break;
         }
     }

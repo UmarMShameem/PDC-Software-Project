@@ -35,6 +35,32 @@ public class BookingAppModel extends Observable {
         this.notifyObservers(output);
     }
     
+    public void changePassword(String currentPassword, String newPassword, String confirmPassword) {
+        if (!currentPassword.equals(currentUser.getPassword())) {
+            output.action = Output.WRONG_CURRENT_PASSWORD;
+        }
+        else if (newPassword.length() < 8 || newPassword.length() > 20 || newPassword.contains(" ")) {
+            // Password must be 8-20 characters in length and must not contain spaces.
+            output.action = Output.INVALID_NEW_PASSWORD;
+        }
+        else if (!newPassword.equals(confirmPassword)) {
+            output.action = Output.NEW_PASSWORD_MISMATCH;
+        }
+        else {
+            // Change the password.
+            currentUser.setPassword(newPassword);
+            if (userDB.containsUser(currentUser.getUsername())) {
+                userDB.changePassword(currentUser, newPassword);
+            }
+            else {
+                memberDB.changePassword((Member) currentUser, newPassword);
+            }
+            output.action = Output.CHANGE_PASSWORD_SUCCESS;
+        }
+        this.setChanged();
+        this.notifyObservers(output);
+    }
+    
     // Create a new User account, save details to the USERS table, notify View that an account has
     // been created.
     public void confirmCreateAccount(String username, String fullname, String password) {
