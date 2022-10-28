@@ -107,6 +107,38 @@ public class BookingAppModel extends Observable {
         menuDB.closeConnection();
     }
     
+    public void registerMember() {
+        if (currentUser.getPayAccount() == null) {
+            output.action = Output.REGISTER_MEMBER_ERROR;
+        }
+        else {
+            Member currentUserMember = new Member(currentUser);
+            userDB.deleteUser(currentUser);
+            memberDB.saveMember(currentUserMember);
+            currentUser = currentUserMember;
+            
+            output.action = Output.REGISTER_MEMBER_SUCCESS;
+            output.outputString1 = String.valueOf(currentUserMember.getMemberID());
+            output.outputString2 = currentUserMember.getExpiry().toString();
+        }
+        this.setChanged();
+        this.notifyObservers(output);
+    }
+    
+    public void viewMembership() {
+        if (currentUser instanceof Member) {
+            output.action = Output.VIEW_MEMBERSHIP;
+            Member currentMember = (Member) currentUser;
+            output.outputString1 = String.valueOf(currentMember.getMemberID());
+            output.outputString2 = currentMember.getExpiry().toString();
+        }
+        else {
+            output.action = Output.VIEW_MEMBERSHIP_OPTION;
+        }
+        this.setChanged();
+        this.notifyObservers(output);
+    }
+    
     public void viewAccountSettings() {
         output.action = Output.VIEW_ACCOUNT_SETTINGS;
         output.outputString1 = currentUser.getUsername();

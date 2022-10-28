@@ -93,6 +93,12 @@ public class BookingAppController implements ActionListener  {
             case "No":
                 this.model.viewAccountSettings();
                 break;
+            case "Membership":
+                this.model.viewMembership();
+                break;
+            case "Become a member":
+                this.model.registerMember();
+                break;
         }
     }
     

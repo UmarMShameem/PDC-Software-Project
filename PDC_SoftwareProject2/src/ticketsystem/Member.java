@@ -21,11 +21,11 @@ public final class Member extends User {
         this.setMemberID(memberID);
         this.setExpiry(expiry);
     }
-
-    // Constructor for new members.
+    
+    // Constructor for newly registered members.
     // Assigns a new 9-digit ID and expiry date 1 year after system date.
-    public Member(String username, String password, String fullname, PayAcc payAccount) {
-        super(username, password, fullname, payAccount);
+    public Member(User user) {
+        super(user.getUsername(), user.getPassword(), user.getFullname(), user.getPayAccount());
         this.setMemberID(generateID());
         this.setExpiry(LocalDate.now().plusYears(1));
     }

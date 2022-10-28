@@ -40,8 +40,8 @@ public class MemberDB extends DBManager {
         return false;
     }
     
-    public void deleteMember(String username) {
-        String memberDelete = "DELETE FROM MEMBERS WHERE USERNAME='"+username+"'";
+    public void deleteMember(Member member) {
+        String memberDelete = "DELETE FROM MEMBERS WHERE USERNAME='"+member.getUsername()+"'";
         try {
             statement.executeUpdate(memberDelete);
         } 
@@ -123,7 +123,7 @@ public class MemberDB extends DBManager {
     @Override
     public void createTable() {
         if (!this.containsTable("MEMBERS")) {
-            String memberCreate = "CREATE TABLE MEMBERS(MEMBER_ID INT, MEMBERSHIP_EXPIRY DATE, USERNAME VARCHAR(20), PASSWORD VARCHAR(20), FULLNAME VARCHAR(40), PA_EMAIL VARCHAR(20))";
+            String memberCreate = "CREATE TABLE MEMBERS(MEMBER_ID INT, MEMBERSHIP_EXPIRY DATE, USERNAME VARCHAR(20), PASSWORD VARCHAR(20), FULLNAME VARCHAR(40), PA_EMAIL VARCHAR(40))";
             try {
                 statement.executeUpdate(memberCreate);
             } 

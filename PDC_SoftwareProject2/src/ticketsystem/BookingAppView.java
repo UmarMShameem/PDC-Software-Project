@@ -79,6 +79,11 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
         jLabel5 = new javax.swing.JLabel();
         jbRemovePA = new javax.swing.JButton();
         jbCancelRemovePA = new javax.swing.JButton();
+        addMembershipPanel = new javax.swing.JPanel();
+        jbMembershipBack = new javax.swing.JButton();
+        jbAddMembership = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         loginPanel = new javax.swing.JPanel();
         jtfUsername = new javax.swing.JTextField();
         jlUsername = new javax.swing.JLabel();
@@ -414,6 +419,47 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 .addContainerGap(54, Short.MAX_VALUE))
         );
 
+        jbMembershipBack.setText("Back to main menu");
+
+        jbAddMembership.setText("Become a member");
+
+        jLabel6.setText("You do not currently have a membership with us. Would you like to join?");
+
+        jLabel7.setText("Members recieve a wide range of benefits, including...");
+
+        javax.swing.GroupLayout addMembershipPanelLayout = new javax.swing.GroupLayout(addMembershipPanel);
+        addMembershipPanel.setLayout(addMembershipPanelLayout);
+        addMembershipPanelLayout.setHorizontalGroup(
+            addMembershipPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(addMembershipPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(addMembershipPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(addMembershipPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jbMembershipBack)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbAddMembership))
+                    .addGroup(addMembershipPanelLayout.createSequentialGroup()
+                        .addGroup(addMembershipPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7))
+                        .addGap(0, 8, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        addMembershipPanelLayout.setVerticalGroup(
+            addMembershipPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addMembershipPanelLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addGroup(addMembershipPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbMembershipBack)
+                    .addComponent(jbAddMembership))
+                .addGap(34, 34, 34))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
@@ -546,6 +592,9 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
         
         jbRemovePA.addActionListener(al);
         jbCancelRemovePA.addActionListener(al);
+        
+        jbAddMembership.addActionListener(al);
+        jbMembershipBack.addActionListener(al);
     }
     /**
      * @param args the command line arguments
@@ -584,6 +633,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel accSettingsPanel;
+    private javax.swing.JPanel addMembershipPanel;
     private javax.swing.JPanel addPayAccountPanel;
     private javax.swing.JPanel createAccountPanel;
     private javax.swing.JPanel homePanel;
@@ -592,7 +642,10 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JButton jbAccSettings;
+    private javax.swing.JButton jbAddMembership;
     private javax.swing.JButton jbAddPayAcc;
     private javax.swing.JButton jbBackToSettings;
     private javax.swing.JButton jbCancelRemovePA;
@@ -603,6 +656,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
     private javax.swing.JButton jbLogOut;
     private javax.swing.JButton jbLogin;
     private javax.swing.JButton jbMembership;
+    private javax.swing.JButton jbMembershipBack;
     private javax.swing.JButton jbRemovePA;
     private javax.swing.JButton jbSettingsBack;
     private javax.swing.JButton jbSettingsPayMethod;
@@ -715,6 +769,17 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
             case Output.PA_IN_USE:
                 JOptionPane.showMessageDialog(null, "This Pay account is already in use.", "Error", JOptionPane.ERROR_MESSAGE);
                 break;
+            case Output.REGISTER_MEMBER_ERROR:
+                JOptionPane.showMessageDialog(null, "You do not have a payment method saved.", "Error", JOptionPane.ERROR_MESSAGE);
+                break;
+            case Output.REGISTER_MEMBER_SUCCESS:
+                String newMemberMessage = "Thank you for becoming a member!\n"
+                        + "Your new membership ID: "+argument.outputString1+"\n"
+                        + "Membership expiry date: "+argument.outputString2;
+                JOptionPane.showMessageDialog(null, newMemberMessage, "Success", JOptionPane.PLAIN_MESSAGE);
+                setContentPane(homePanel);
+                setSize(homePanel.getPreferredSize());
+                break;
             case Output.REMOVE_PAY_ACCOUNT:
                 // Prompt the user to remove their Pay account.
                 setContentPane(removePayAccountPanel);
@@ -742,6 +807,16 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
             case Output.WRONG_CURRENT_PASSWORD:
                 JOptionPane.showMessageDialog(null, "The current password you entered does not match your actual current password.", "Error", JOptionPane.ERROR_MESSAGE);
                 break;
+            case Output.VIEW_MEMBERSHIP:
+                String message = "Your membership ID: "+argument.outputString1+"\n"
+                        + "Membership expiry date: "+argument.outputString2;
+                JOptionPane.showMessageDialog(null, message, "Membership", JOptionPane.INFORMATION_MESSAGE);
+                break;
+            case Output.VIEW_MEMBERSHIP_OPTION:
+                setContentPane(addMembershipPanel);
+                setSize(addMembershipPanel.getPreferredSize());
+                break;
+
         }
     }
 }

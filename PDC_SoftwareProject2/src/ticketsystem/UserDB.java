@@ -25,8 +25,8 @@ public final class UserDB extends DBManager {
         return false;
     }
     
-    public void deleteUser(String username) {
-        String userDelete = "DELETE FROM USERS WHERE USERNAME='"+username+"'";
+    public void deleteUser(User user) {
+        String userDelete = "DELETE FROM USERS WHERE USERNAME='"+user.getUsername()+"'";
         try {
             statement.executeUpdate(userDelete);
         } 
