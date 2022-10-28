@@ -78,9 +78,6 @@
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JTextField" name="jtfUName">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfUNameActionPerformed"/>
-          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
@@ -114,9 +111,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Confirm &amp; Create Account"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbConfirmActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jlFName">
           <Properties>
@@ -483,9 +477,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Back to account settings"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbBackToSettingsActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -749,9 +740,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Create Account"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbCreateAccountActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>

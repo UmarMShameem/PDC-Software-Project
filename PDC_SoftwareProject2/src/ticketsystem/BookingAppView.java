@@ -94,12 +94,6 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
         jLabel4 = new javax.swing.JLabel();
         jlInvalidPassword = new javax.swing.JLabel();
 
-        jtfUName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfUNameActionPerformed(evt);
-            }
-        });
-
         jlUName.setText("New Username");
 
         jlNewPass.setText("New Password");
@@ -107,11 +101,6 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
         jlConfirmPass.setText("Confirm Password");
 
         jbConfirm.setText("Confirm & Create Account");
-        jbConfirm.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbConfirmActionPerformed(evt);
-            }
-        });
 
         jlFName.setText("Full Name");
 
@@ -332,11 +321,6 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
         jbAddPayAcc.setText("Add Pay account");
 
         jbBackToSettings.setText("Back to account settings");
-        jbBackToSettings.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbBackToSettingsActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout addPayAccountPanelLayout = new javax.swing.GroupLayout(addPayAccountPanel);
         addPayAccountPanel.setLayout(addPayAccountPanelLayout);
@@ -470,11 +454,6 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
         jbLogin.setText("Login");
 
         jbCreateAccount.setText("Create Account");
-        jbCreateAccount.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbCreateAccountActionPerformed(evt);
-            }
-        });
 
         jLabel4.setFont(new java.awt.Font("Rockwell", 0, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -551,22 +530,6 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jbCreateAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCreateAccountActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbCreateAccountActionPerformed
-
-    private void jbConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConfirmActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbConfirmActionPerformed
-
-    private void jtfUNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfUNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfUNameActionPerformed
-
-    private void jbBackToSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBackToSettingsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbBackToSettingsActionPerformed
 
     public void addActionListener(ActionListener al) {
         // Add action listeners to login/createAccount panel buttons.
