@@ -6,6 +6,9 @@ package ticketsystem;
 
 import java.awt.Component;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowListener;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.JOptionPane;
@@ -91,6 +94,8 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
         jLabel10 = new javax.swing.JLabel();
         jcbTravelDate = new javax.swing.JComboBox<>();
         jcbDepartTime = new javax.swing.JComboBox<>();
+        jbConfirmBooking = new javax.swing.JButton();
+        jbCancelBooking = new javax.swing.JButton();
         loginPanel = new javax.swing.JPanel();
         jtfUsername = new javax.swing.JTextField();
         jlUsername = new javax.swing.JLabel();
@@ -453,15 +458,17 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
 
         jcbDestination.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Wellington - Picton", "Picton - Wellington" }));
 
-        jLabel8.setText("Destination");
+        jLabel8.setText("Journey");
 
         jLabel9.setText("Travel Date");
 
         jLabel10.setText("Departure Time");
 
-        jcbTravelDate.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbDepartTime.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "8.30am", "11.00am", "1.30pm", "4.00pm" }));
 
-        jcbDepartTime.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jbConfirmBooking.setText("Confirm Booking");
+
+        jbCancelBooking.setText("Cancel");
 
         javax.swing.GroupLayout bookTicketPanelLayout = new javax.swing.GroupLayout(bookTicketPanel);
         bookTicketPanel.setLayout(bookTicketPanelLayout);
@@ -469,21 +476,22 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
             bookTicketPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bookTicketPanelLayout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(bookTicketPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel10)
+                    .addComponent(jbCancelBooking)
+                    .addComponent(jLabel8))
                 .addGroup(bookTicketPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(bookTicketPanelLayout.createSequentialGroup()
-                        .addGroup(bookTicketPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10))
                         .addGap(18, 18, 18)
                         .addGroup(bookTicketPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jcbTravelDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jcbDepartTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jcbDepartTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbDestination, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(bookTicketPanelLayout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel8)
-                        .addGap(18, 18, 18)
-                        .addComponent(jcbDestination, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(211, Short.MAX_VALUE))
+                        .addGap(74, 74, 74)
+                        .addComponent(jbConfirmBooking)))
+                .addContainerGap(173, Short.MAX_VALUE))
         );
         bookTicketPanelLayout.setVerticalGroup(
             bookTicketPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -500,7 +508,11 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 .addGroup(bookTicketPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jcbDepartTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10))
-                .addContainerGap(222, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
+                .addGroup(bookTicketPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbCancelBooking)
+                    .addComponent(jbConfirmBooking))
+                .addGap(23, 23, 23))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -617,6 +629,9 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
         
         jbAddMembership.addActionListener(al);
         jbMembershipBack.addActionListener(al);
+        
+        jbConfirmBooking.addActionListener(al);
+        jbCancelBooking.addActionListener(al);
     }
     /**
      * @param args the command line arguments
@@ -674,9 +689,11 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
     private javax.swing.JButton jbAddMembership;
     private javax.swing.JButton jbAddPayAcc;
     private javax.swing.JButton jbBackToSettings;
+    private javax.swing.JButton jbCancelBooking;
     private javax.swing.JButton jbCancelRemovePA;
     private javax.swing.JButton jbChangePass;
     private javax.swing.JButton jbConfirm;
+    private javax.swing.JButton jbConfirmBooking;
     private javax.swing.JButton jbCreateAccount;
     private javax.swing.JButton jbCreateBooking;
     private javax.swing.JButton jbLogOut;
@@ -761,8 +778,17 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 setSize(homePanel.getPreferredSize());
                 break;
             case Output.CREATE_BOOKING:
+                // Populate Travel Date combo box with travel dates for the next month, in DD/MM/YYYY format.
+                LocalDate sysDate = LocalDate.now().plusMonths(1);
+                
+                jcbTravelDate.addItem("3/"+sysDate.getMonthValue()+"/"+sysDate.getYear());
+                jcbTravelDate.addItem("7/"+sysDate.getMonthValue()+"/"+sysDate.getYear());
+                jcbTravelDate.addItem("14/"+sysDate.getMonthValue()+"/"+sysDate.getYear());
+                jcbTravelDate.addItem("20/"+sysDate.getMonthValue()+"/"+sysDate.getYear());
+                jcbTravelDate.addItem("22/"+sysDate.getMonthValue()+"/"+sysDate.getYear());
+                
                 setContentPane(bookTicketPanel);
-                setSize(bookTicketPanel.getSize());
+                setSize(bookTicketPanel.getPreferredSize());
                 break;
             case Output.INVALID_LOGIN_CREDENTIALS:
                 jlInvalidPassword.setText("Invalid login credentials. Try again.");
