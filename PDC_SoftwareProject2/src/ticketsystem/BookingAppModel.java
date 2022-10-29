@@ -54,6 +54,12 @@ public class BookingAppModel extends Observable {
         this.setChanged();
         this.notifyObservers(output);
     }
+    
+    public void createBooking() {
+        output.action = Output.CREATE_BOOKING;
+        this.setChanged();
+        this.notifyObservers(output);
+    }
 
     // Notify View to switch to the Create Account JPanel.
     public void createAccount() {

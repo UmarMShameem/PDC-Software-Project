@@ -7,26 +7,27 @@ public class Output {
     public static final int CHANGE_PASSWORD_SUCCESS = 3;
     public static final int CREATE_ACCOUNT = 4; 
     public static final int CREATE_ACCOUNT_SUCCESS = 5;
-    public static final int INVALID_LOGIN_CREDENTIALS = 6;
-    public static final int INVALID_NAME = 7;
-    public static final int INVALID_NAME_LENGTH = 8;
-    public static final int INVALID_NEW_PASSWORD = 9;
-    public static final int INVALID_PA_EMAIL = 10;
-    public static final int INVALID_PA_PASSWORD = 11;
-    public static final int INVALID_USERNAME = 12;
-    public static final int LOG_IN_SUCCESS = 13;
-    public static final int LOG_OUT = 14;
-    public static final int NEW_PASSWORD_MISMATCH = 15;
-    public static final int PA_IN_USE = 16;
-    public static final int REGISTER_MEMBER_SUCCESS = 17;
-    public static final int REGISTER_MEMBER_ERROR = 18;
-    public static final int REMOVE_PAY_ACCOUNT = 19;
-    public static final int REMOVE_PAY_ACCOUNT_SUCCESS = 20;
-    public static final int USERNAME_EXISTS = 21;
-    public static final int VIEW_ACCOUNT_SETTINGS = 22;
-    public static final int VIEW_MEMBERSHIP = 23;
-    public static final int VIEW_MEMBERSHIP_OPTION = 24;
-    public static final int WRONG_CURRENT_PASSWORD = 25;
+    public static final int CREATE_BOOKING = 6;
+    public static final int INVALID_LOGIN_CREDENTIALS = 7;
+    public static final int INVALID_NAME = 8;
+    public static final int INVALID_NAME_LENGTH = 9;
+    public static final int INVALID_NEW_PASSWORD = 10;
+    public static final int INVALID_PA_EMAIL = 11;
+    public static final int INVALID_PA_PASSWORD = 12;
+    public static final int INVALID_USERNAME = 13;
+    public static final int LOG_IN_SUCCESS = 14;
+    public static final int LOG_OUT = 15;
+    public static final int NEW_PASSWORD_MISMATCH = 16;
+    public static final int PA_IN_USE = 17;
+    public static final int REGISTER_MEMBER_SUCCESS = 18;
+    public static final int REGISTER_MEMBER_ERROR = 19;
+    public static final int REMOVE_PAY_ACCOUNT = 20;
+    public static final int REMOVE_PAY_ACCOUNT_SUCCESS = 21;
+    public static final int USERNAME_EXISTS = 22;
+    public static final int VIEW_ACCOUNT_SETTINGS = 23;
+    public static final int VIEW_MEMBERSHIP = 24;
+    public static final int VIEW_MEMBERSHIP_OPTION = 25;
+    public static final int WRONG_CURRENT_PASSWORD = 26;
     
     // BookingAppModel will take an Output object with an action and 
     // output strings to notify the View.

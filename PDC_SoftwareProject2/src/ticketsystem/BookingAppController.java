@@ -2,8 +2,10 @@ package ticketsystem;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
-public class BookingAppController implements ActionListener  {
+public class BookingAppController implements ActionListener, ItemListener  {
     public BookingAppModel model;
     public BookingAppView view;
     
@@ -99,7 +101,15 @@ public class BookingAppController implements ActionListener  {
             case "Become a member":
                 this.model.registerMember();
                 break;
+            case "Create a Booking":
+                this.model.createAccount();
+                break;
         }
+    }
+
+    @Override
+    public void itemStateChanged(ItemEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }
