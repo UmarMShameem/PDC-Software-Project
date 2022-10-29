@@ -2,6 +2,7 @@ package ticketsystem;
 
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -62,6 +63,36 @@ public class MenuDB extends DBManager {
             Logger.getLogger(MenuDB.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+    
+    public ArrayList<Meal> getMealList() {
+        String sqlQuery = "SELECT * FROM MEALS";
+        ArrayList<Meal> mealList = new ArrayList<>();
+        try {
+            ResultSet rs = statement.executeQuery(sqlQuery);
+            while (rs.next()) {
+                mealList.add(new Meal(rs.getString("MEAL_NAME"), rs.getString("MEAL_DESC"), rs.getDouble("PRICE")));
+            }
+        } 
+        catch (SQLException ex) {
+            Logger.getLogger(MenuDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return mealList;
+    }
+    
+    public ArrayList<Drink> getDrinkList() {
+        String sqlQuery = "SELECT * FROM DRINKS";
+        ArrayList<Drink> drinkList = new ArrayList<>();
+        try {
+            ResultSet rs = statement.executeQuery(sqlQuery);
+            while (rs.next()) {
+                drinkList.add(new Drink(rs.getString("DRINK_NAME"), rs.getString("DRINK_DESC"), rs.getDouble("PRICE")));
+            }
+        } 
+        catch (SQLException ex) {
+            Logger.getLogger(MenuDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return drinkList;
     }
     
     @Override

@@ -12,8 +12,8 @@ import java.util.logging.Logger;
 public abstract class DBManager {
     private static final String USER_NAME = "pdc";
     private static final String PASSWORD = "pdcproj2";
-    private static final String URL = "jdbc:derby://localhost:1527/BookingSystemDB";
-//    private static final String URL = "jdbc:derby:BookingSystemDB; create=true";
+//    private static final String URL = "jdbc:derby://localhost:1527/BookingSystemDB";
+    private static final String URL = "jdbc:derby:BookingSystemDB; create=true";
     
     Connection connection;
     Statement statement;
