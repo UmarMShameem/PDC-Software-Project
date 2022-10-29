@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.sql.ResultSet;
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -63,6 +65,22 @@ public class TicketDB extends DBManager {
         catch (SQLException ex) {
             Logger.getLogger(TicketDB.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public boolean userHasBooking(User user, LocalDate travelDate, LocalTime departTime) {
+        String sqlQuery = "SELECT * FROM TICKETS WHERE USERNAME='"+user.getUsername()
+                +"' AND TRAVEL_DATE='"+Date.valueOf(travelDate)
+                +"' AND DEPART_TIME='"+Time.valueOf(departTime)+"'";
+        try {
+            ResultSet rs = statement.executeQuery(sqlQuery);
+            if (rs.next()) {
+                return true;
+            }
+        } 
+        catch (SQLException ex) {
+            Logger.getLogger(TicketDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
     
     @Override

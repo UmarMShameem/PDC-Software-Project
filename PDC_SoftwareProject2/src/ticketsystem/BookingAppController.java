@@ -109,6 +109,13 @@ public class BookingAppController implements ActionListener, ListSelectionListen
             case "Cancel":
                 this.model.backToHome();
                 break;
+            case "Book Ferry":
+                this.model.validateBooking((String)this.view.jcbJourney.getSelectedItem(), 
+                        (String) this.view.jcbTravelDate.getSelectedItem(), 
+                        (String) this.view.jcbDepartTime.getSelectedItem(), 
+                        this.view.mealList.getSelectedValue(), 
+                        this.view.drinkList.getSelectedValue());
+                break;
         }
     }
 

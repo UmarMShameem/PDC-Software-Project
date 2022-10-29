@@ -1,5 +1,8 @@
 package ticketsystem;
 
+import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Observable;
 
 public class BookingAppModel extends Observable {
@@ -61,6 +64,68 @@ public class BookingAppModel extends Observable {
     
     public void createBooking() {
         output.action = Output.CREATE_BOOKING;
+        this.setChanged();
+        this.notifyObservers(output);
+    }
+    
+    public void validateBooking(String journey, String travelDate, String departTime, String mealName, String drinkName) {
+        if (currentUser.getPayAccount() == null) {
+            output.action = Output.BOOKING_ERROR;
+            output.outputString1 = "Please add a payment method before making a booking.\n"
+                    + "You can make a booking by going to Account Settings -> Add/Remove Payment Method.";
+        }
+        else {
+            if (ticketDB.userHasBooking(currentUser, toLocalDate(travelDate), toLocalTime(departTime))) {
+                output.action = Output.BOOKING_ERROR;
+                output.outputString1 = "It seems you already have a booking for the date and time you selected. Please select another date or time.";
+            }
+            else if (mealName == null || drinkName == null) {
+                output.action = Output.BOOKING_ERROR;
+                output.outputString1 = "Please select a meal and drink item.";
+            }
+            else {
+                output.action = Output.CONFIRM_BOOKING_PROMPT;
+                output.outputString1 = "Confirm booking?\n\n"
+                        + "Journey: "+journey+"\n"
+                        + "Travel Date: "+travelDate+"\n"
+                        + "Departure Time: "+departTime+"\n"
+                        + "Meal: "+mealName+"\n"
+                        + "Drink: "+drinkName;
+                
+                output.outputString2 = "Ferry fare: $60.00\n";
+                DecimalFormat df = new DecimalFormat();
+                df.setMinimumFractionDigits(2);
+                df.setMaximumFractionDigits(2);
+                double mealCost = 0.0;
+                double drinkCost = 0.0;
+                
+                if (!mealName.equals("No meal")) {
+                    mealCost = menuDB.getMeal(mealName).getPrice();
+                }
+                output.outputString2 += "Meal cost: $"+df.format(mealCost)+"\n";
+                
+                if (!drinkName.equals("No drink")) {
+                    drinkCost = menuDB.getDrink(drinkName).getPrice();
+                }
+                
+                double subtotal = 60.0 + mealCost + drinkCost;
+                double total = subtotal;
+                output.outputString2 += "Drink cost: $"+df.format(drinkCost)+"\n"
+                        + "-----------------------\n"
+                        + "Subtotal: $"+df.format(subtotal)+"\n";
+                
+                if (currentUser instanceof Member) {
+                    output.outputString2 += "Discount: -$"+df.format(subtotal * 0.2)+"\n";
+                    total = subtotal * 0.8;
+                }
+                else {
+                    output.outputString2 += "Discount: -$0.00\n";
+                }
+                
+                output.outputString2 += "-----------------------\n"
+                        + "Total: $"+df.format(total)+"";
+            }
+        }
         this.setChanged();
         this.notifyObservers(output);
     }
@@ -233,6 +298,24 @@ public class BookingAppModel extends Observable {
         output.action = Output.REMOVE_PAY_ACCOUNT_SUCCESS;
         this.setChanged();
         this.notifyObservers(output);
+    }
+    
+    private LocalDate toLocalDate(String date) {
+        String[] splitDate = date.split("/");
+        return LocalDate.of(Integer.parseInt(splitDate[2]), Integer.parseInt(splitDate[1]), Integer.parseInt(splitDate[0]));
+    }
+    
+    private LocalTime toLocalTime(String time) {
+        String[] splitTime = time.split(" ");
+        int hour = Integer.parseInt(splitTime[0].split(":")[0]);
+        int minute = Integer.parseInt(splitTime[0].split(":")[1]);
+        
+        if (splitTime[1].equals("PM")) {
+            if (hour < 12) {
+                hour += 12;
+            }
+        }
+        return LocalTime.of(hour, minute);
     }
     
     // Confirm whether the user input is valid.
