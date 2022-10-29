@@ -4,15 +4,13 @@
  */
 package ticketsystem;
 
-import java.awt.Component;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowListener;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.Observable;
 import java.util.Observer;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -693,6 +691,11 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
         jbConfirmBooking.addActionListener(al);
         jbCancelBooking.addActionListener(al);
     }
+    
+    public void addListSelectionListener(ListSelectionListener l) {
+        mealList.addListSelectionListener(l);
+        drinkList.addListSelectionListener(l);
+    }
     /**
      * @param args the command line arguments
      */
@@ -849,7 +852,9 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 break;
             case Output.CREATE_BOOKING:
                 mealList.setSelectedValue(null, false);
+                jtpMealDesc.setText("");
                 drinkList.setSelectedValue(null, false);
+                jtpDrinkDesc.setText("");
                 setContentPane(bookTicketPanel);
                 setSize(bookTicketPanel.getPreferredSize());
                 break;
@@ -892,7 +897,6 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 JOptionPane.showMessageDialog(null, "This Pay account is already in use.", "Error", JOptionPane.ERROR_MESSAGE);
                 break;
             case Output.POPULATE_MEAL_DRINK_LIST:
-                System.out.println("Populating meal/drink lists...");
                 DefaultListModel mealListModel = new DefaultListModel();
                 mealListModel.addElement("No meal");
                 for (Meal m: argument.mealList) {
@@ -906,7 +910,20 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 }
                 mealList.setModel(mealListModel);
                 drinkList.setModel(drinkListModel);
-                System.out.println("Done.");
+                break;
+            case Output.PRINT_MEAL_INFO:
+                String mealInfo = argument.outputString1;
+                if (!mealInfo.equals("")) {
+                    mealInfo += "\n\n"+argument.outputString2;
+                }
+                jtpMealDesc.setText(mealInfo);
+                break;
+            case Output.PRINT_DRINK_INFO:
+                String drinkInfo = argument.outputString1;
+                if (!drinkInfo.equals("")) {
+                    drinkInfo += "\n\n"+argument.outputString2;
+                }
+                jtpDrinkDesc.setText(drinkInfo);
                 break;
             case Output.REGISTER_MEMBER_ERROR:
                 JOptionPane.showMessageDialog(null, "You do not have a payment method saved.", "Error", JOptionPane.ERROR_MESSAGE);

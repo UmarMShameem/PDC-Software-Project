@@ -37,6 +37,20 @@ public class MenuDB extends DBManager {
         }
     }
     
+    public boolean containsMeal(String name) {
+        String sqlQuery = "SELECT * FROM MEALS WHERE MEAL_NAME='"+name+"'";
+        try {
+            ResultSet rs = statement.executeQuery(sqlQuery);
+            if (rs.next()) {
+                return true;
+            }
+        } 
+        catch (SQLException ex) {
+            Logger.getLogger(MenuDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
     public Meal getMeal(String name) {
         String sqlQuery = "SELECT * FROM MEALS WHERE MEAL_NAME='"+name+"'";
         try {

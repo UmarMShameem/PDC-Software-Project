@@ -22,15 +22,17 @@ public class Output {
     public static final int NEW_PASSWORD_MISMATCH = 16;
     public static final int PA_IN_USE = 17;
     public static final int POPULATE_MEAL_DRINK_LIST = 18;
-    public static final int REGISTER_MEMBER_SUCCESS = 19;
-    public static final int REGISTER_MEMBER_ERROR = 20;
-    public static final int REMOVE_PAY_ACCOUNT = 21;
-    public static final int REMOVE_PAY_ACCOUNT_SUCCESS = 22;
-    public static final int USERNAME_EXISTS = 23;
-    public static final int VIEW_ACCOUNT_SETTINGS = 24;
-    public static final int VIEW_MEMBERSHIP = 25;
-    public static final int VIEW_MEMBERSHIP_OPTION = 26;
-    public static final int WRONG_CURRENT_PASSWORD = 27;
+    public static final int PRINT_MEAL_INFO = 19;
+    public static final int PRINT_DRINK_INFO = 20;
+    public static final int REGISTER_MEMBER_SUCCESS = 21;
+    public static final int REGISTER_MEMBER_ERROR = 22;
+    public static final int REMOVE_PAY_ACCOUNT = 23;
+    public static final int REMOVE_PAY_ACCOUNT_SUCCESS = 24;
+    public static final int USERNAME_EXISTS = 25;
+    public static final int VIEW_ACCOUNT_SETTINGS = 26;
+    public static final int VIEW_MEMBERSHIP = 27;
+    public static final int VIEW_MEMBERSHIP_OPTION = 28;
+    public static final int WRONG_CURRENT_PASSWORD = 29;
     
     // BookingAppModel will take an Output object with an action and 
     // output strings to notify the View.

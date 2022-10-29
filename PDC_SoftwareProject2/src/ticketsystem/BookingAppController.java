@@ -2,10 +2,11 @@ package ticketsystem;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import javax.swing.JList;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
-public class BookingAppController implements ActionListener, ItemListener  {
+public class BookingAppController implements ActionListener, ListSelectionListener  {
     public BookingAppModel model;
     public BookingAppView view;
     
@@ -13,6 +14,7 @@ public class BookingAppController implements ActionListener, ItemListener  {
         this.model = model;
         this.view = view;
         this.view.addActionListener(this);
+        this.view.addListSelectionListener(this);
     }
     
     @Override // Handles user interactions with the View.
@@ -111,6 +113,11 @@ public class BookingAppController implements ActionListener, ItemListener  {
     }
 
     @Override
-    public void itemStateChanged(ItemEvent e) {
+    public void valueChanged(ListSelectionEvent e) {
+        JList currentList = (JList) e.getSource();
+        String selectedItem = (String) currentList.getSelectedValue();
+        if (selectedItem != null) {
+            this.model.printItemInfo(selectedItem);
+        }
     }
 }

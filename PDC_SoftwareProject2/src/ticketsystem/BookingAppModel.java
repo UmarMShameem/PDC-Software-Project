@@ -127,6 +127,33 @@ public class BookingAppModel extends Observable {
         menuDB.closeConnection();
     }
     
+    public void printItemInfo(String item) {
+        if (item.equals("No meal")) {
+            output.action = Output.PRINT_MEAL_INFO;
+            output.outputString1 = "";
+        }
+        else if (item.equals("No drink")) {
+            output.action = Output.PRINT_DRINK_INFO;
+            output.outputString1 = "";
+        }
+        else {
+            if (menuDB.containsMeal(item)) {
+                Meal selectedMeal = menuDB.getMeal(item);
+                output.action = Output.PRINT_MEAL_INFO;
+                output.outputString1 = selectedMeal.getDesc();
+                output.outputString2 = "Price: $"+String.valueOf(selectedMeal.getPrice())+"0";
+            }
+            else {
+                Drink selectedDrink = menuDB.getDrink(item);
+                output.action = Output.PRINT_DRINK_INFO;
+                output.outputString1 = selectedDrink.getDesc();
+                output.outputString2 = "Price: $"+String.valueOf(selectedDrink.getPrice())+"0";
+            }
+        }
+        this.setChanged();
+        this.notifyObservers(output);
+    }
+    
     public void registerMember() {
         if (currentUser.getPayAccount() == null) {
             output.action = Output.REGISTER_MEMBER_ERROR;
