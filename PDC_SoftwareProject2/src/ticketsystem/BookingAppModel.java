@@ -12,6 +12,8 @@ public class BookingAppModel extends Observable {
     User currentUser;
     Output output;
     
+    boolean listsFilled;
+    
     public BookingAppModel() {
         userDB = new UserDB();
         memberDB = new MemberDB();
@@ -20,6 +22,8 @@ public class BookingAppModel extends Observable {
         menuDB = new MenuDB();
         
         output = new Output();
+        
+        listsFilled = false;
     }
     
     public void addPayAccount(String email, String password) {
@@ -64,6 +68,16 @@ public class BookingAppModel extends Observable {
     // Notify View to switch to the Create Account JPanel.
     public void createAccount() {
         output.action = Output.CREATE_ACCOUNT;
+        this.setChanged();
+        this.notifyObservers(output);
+    }
+    
+    public void createMealDrinkLists() {
+        output.action = Output.POPULATE_MEAL_DRINK_LIST;
+        output.mealList = menuDB.getMealList();
+        output.drinkList = menuDB.getDrinkList();
+        
+        listsFilled = true;
         this.setChanged();
         this.notifyObservers(output);
     }
@@ -268,5 +282,9 @@ public class BookingAppModel extends Observable {
         output.outputString1 = currentUser.getUsername();
         this.setChanged();
         this.notifyObservers(output);
+        
+        if (!listsFilled) {
+            createMealDrinkLists();
+        }
     }
 }

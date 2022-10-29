@@ -101,8 +101,11 @@ public class BookingAppController implements ActionListener, ItemListener  {
             case "Become a member":
                 this.model.registerMember();
                 break;
-            case "Create a Booking":
+            case "Make a Booking":
                 this.model.createBooking();
+                break;
+            case "Cancel":
+                this.model.backToHome();
                 break;
         }
     }

@@ -1,5 +1,7 @@
 package ticketsystem;
 
+import java.util.ArrayList;
+
 public class Output {
     public static final int ADD_PAY_ACCOUNT = 0;
     public static final int ADD_PAY_ACCOUNT_SUCCESS = 1;
@@ -19,20 +21,23 @@ public class Output {
     public static final int LOG_OUT = 15;
     public static final int NEW_PASSWORD_MISMATCH = 16;
     public static final int PA_IN_USE = 17;
-    public static final int REGISTER_MEMBER_SUCCESS = 18;
-    public static final int REGISTER_MEMBER_ERROR = 19;
-    public static final int REMOVE_PAY_ACCOUNT = 20;
-    public static final int REMOVE_PAY_ACCOUNT_SUCCESS = 21;
-    public static final int USERNAME_EXISTS = 22;
-    public static final int VIEW_ACCOUNT_SETTINGS = 23;
-    public static final int VIEW_MEMBERSHIP = 24;
-    public static final int VIEW_MEMBERSHIP_OPTION = 25;
-    public static final int WRONG_CURRENT_PASSWORD = 26;
+    public static final int POPULATE_MEAL_DRINK_LIST = 18;
+    public static final int REGISTER_MEMBER_SUCCESS = 19;
+    public static final int REGISTER_MEMBER_ERROR = 20;
+    public static final int REMOVE_PAY_ACCOUNT = 21;
+    public static final int REMOVE_PAY_ACCOUNT_SUCCESS = 22;
+    public static final int USERNAME_EXISTS = 23;
+    public static final int VIEW_ACCOUNT_SETTINGS = 24;
+    public static final int VIEW_MEMBERSHIP = 25;
+    public static final int VIEW_MEMBERSHIP_OPTION = 26;
+    public static final int WRONG_CURRENT_PASSWORD = 27;
     
     // BookingAppModel will take an Output object with an action and 
     // output strings to notify the View.
     String outputString1;
     String outputString2;
     String outputString3;
+    ArrayList<Meal> mealList;
+    ArrayList<Drink> drinkList;
     int action;
 }
