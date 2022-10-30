@@ -6,12 +6,13 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class MenuDB extends DBManager {
+public final class MenuDB extends DBManager {
     public MenuDB() {
         super();
         createTable();
     }
     
+    // Populate the MEALS table.
     public void addMealItems() {
         String mealInsert = "INSERT INTO MEALS VALUES ('Beef Pie', 'Pie filled with beef mince, cheese sauce and gravy.', 10.5), "
                 + "('BBQ Chicken Pizza', 'Pizza topped with chicken, mozarella cheese, olives, red onion, BBQ sauce and capsicum.', 12.0), "
@@ -24,6 +25,7 @@ public class MenuDB extends DBManager {
         }
     }
     
+    // Populate the DRINKS table.
     public void addDrinkItems() {
         String drinkInsert = "INSERT INTO DRINKS VALUES ('Water', '500ml bottled water.', 2.0), "
                 + "('Apple Juice', '500ml Keri apple juice.', 3.0), "
@@ -37,6 +39,7 @@ public class MenuDB extends DBManager {
         }
     }
     
+    // Query the MEALS table for an entry matching the input name.
     public boolean containsMeal(String name) {
         String sqlQuery = "SELECT * FROM MEALS WHERE MEAL_NAME='"+name+"'";
         try {
@@ -51,6 +54,7 @@ public class MenuDB extends DBManager {
         return false;
     }
     
+    // Retrieve fields from MEALS entry that matches the input name, return Meal object.
     public Meal getMeal(String name) {
         String sqlQuery = "SELECT * FROM MEALS WHERE MEAL_NAME='"+name+"'";
         try {
@@ -65,6 +69,7 @@ public class MenuDB extends DBManager {
         return null;
     }
     
+    // Retrieve fields from DRINKS entry that matches the input name, return Drink object.
     public Drink getDrink(String name) {
         String sqlQuery = "SELECT * FROM DRINKS WHERE DRINK_NAME='"+name+"'";
         try {
@@ -79,11 +84,13 @@ public class MenuDB extends DBManager {
         return null;
     }
     
+    // Return a list of all the meals in the MEALS table.
     public ArrayList<Meal> getMealList() {
         String sqlQuery = "SELECT * FROM MEALS";
         ArrayList<Meal> mealList = new ArrayList<>();
         try {
             ResultSet rs = statement.executeQuery(sqlQuery);
+            // Iterate through the ResultSet, adding a Meal object to the list with the meal info.
             while (rs.next()) {
                 mealList.add(new Meal(rs.getString("MEAL_NAME"), rs.getString("MEAL_DESC"), rs.getDouble("PRICE")));
             }
@@ -94,6 +101,7 @@ public class MenuDB extends DBManager {
         return mealList;
     }
     
+    // Return a list of all the drinks in the DRINKS table.
     public ArrayList<Drink> getDrinkList() {
         String sqlQuery = "SELECT * FROM DRINKS";
         ArrayList<Drink> drinkList = new ArrayList<>();
