@@ -53,6 +53,7 @@ public class BookingAppController implements ActionListener, ListSelectionListen
                 }
                 
                 if (this.model.validAccountDetails(newUsername, fullName, newPassword, confirmPassword)) {
+                    // Check if the details the user entered are valid, then create the account.
                     this.model.confirmCreateAccount(newUsername, fullName, newPassword);
                 }
                 break;
@@ -67,6 +68,7 @@ public class BookingAppController implements ActionListener, ListSelectionListen
                 this.model.backToHome();
                 break;
             case "Change password":
+                // Retrieve the password fields as char arrays, save them into String objects to pass to the model.
                 String currentPassword = "";
                 String newUserPassword = "";
                 String confirmNewPassword = "";
@@ -110,6 +112,7 @@ public class BookingAppController implements ActionListener, ListSelectionListen
                 this.model.backToHome();
                 break;
             case "Book Ferry":
+                // Get the selected booking details to pass to the model.
                 this.model.validateBooking((String)this.view.jcbJourney.getSelectedItem(), 
                         (String) this.view.jcbTravelDate.getSelectedItem(), 
                         (String) this.view.jcbDepartTime.getSelectedItem(), 
@@ -130,6 +133,7 @@ public class BookingAppController implements ActionListener, ListSelectionListen
                 this.model.viewTicketList();
                 break;
             case "View Ticket":
+                // Get selected ticket number from the panel, pass to model as integer.
                 String selectedTicket = this.view.ticketList.getSelectedValue();
                 if (selectedTicket != null) {
                     this.model.viewTicket(Integer.parseInt(selectedTicket.split(":")[0]));
@@ -138,8 +142,9 @@ public class BookingAppController implements ActionListener, ListSelectionListen
         }
     }
 
-    @Override
+    @Override // Handles user selection of meal and drink JLists.
     public void valueChanged(ListSelectionEvent e) {
+        // For each mealList/drinkList selection, get the selected item.
         JList currentList = (JList) e.getSource();
         String selectedItem = (String) currentList.getSelectedValue();
         if (selectedItem != null) {

@@ -24,15 +24,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
     public BookingAppView() {
         initComponents();
         this.setSize(loginPanel.getSize());
-        
-        // Populate Travel Date combo box with travel dates for the next month, in DD/MM/YYYY format.
-        LocalDate sysDate = LocalDate.now().plusMonths(1);
-                
-        jcbTravelDate.addItem("3/"+sysDate.getMonthValue()+"/"+sysDate.getYear());
-        jcbTravelDate.addItem("7/"+sysDate.getMonthValue()+"/"+sysDate.getYear());
-        jcbTravelDate.addItem("14/"+sysDate.getMonthValue()+"/"+sysDate.getYear());
-        jcbTravelDate.addItem("20/"+sysDate.getMonthValue()+"/"+sysDate.getYear());
-        jcbTravelDate.addItem("22/"+sysDate.getMonthValue()+"/"+sysDate.getYear());
+        addDates();
     }
 
     /**
@@ -768,81 +760,100 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
     }// </editor-fold>//GEN-END:initComponents
 
     public void addActionListener(ActionListener al) {
-        // Add action listeners to login/createAccount panel buttons.
+        // Add action listeners to the JButtons.
+        
+        // Login/Create Account panel buttons
         jbLogin.addActionListener(al);
         jbCreateAccount.addActionListener(al);
         jbConfirm.addActionListener(al);
         
-        // Add action listeners to home panel buttons.
+        // Home panel buttons
         jbCreateBooking.addActionListener(al);
         jbViewBookings.addActionListener(al);
         jbMembership.addActionListener(al);
         jbAccSettings.addActionListener(al);
         jbLogOut.addActionListener(al);
         
-        // Add action listener to accSettingsPanel buttons.
+        // accSettingsPanel buttons
         jbChangePass.addActionListener(al);
         jbSettingsBack.addActionListener(al);
         jbSettingsPayMethod.addActionListener(al);
         
-        // Add action listener to addPayAccountPanel buttons.
+        // addPayAccountPanel buttons
         jbAddPayAcc.addActionListener(al);
         jbBackToSettings.addActionListener(al);
         
+        // removePayAccountPanel buttons
         jbRemovePA.addActionListener(al);
         jbCancelRemovePA.addActionListener(al);
         
+        // addMembershipPanel buttons
         jbAddMembership.addActionListener(al);
         jbMembershipBack.addActionListener(al);
         
+        // bookTicketPanel buttons
         jbBookFerry.addActionListener(al);
         jbCancelBooking.addActionListener(al);
         
+        // confirmBookingPanel buttons
         jbConfirmBooking.addActionListener(al);
         jbCancel.addActionListener(al);
         
+        // ticketViewPanel buttons
         jbViewTicket.addActionListener(al);
         jbViewTicketBack.addActionListener(al);
     }
     
+    // Add ListSelectionListeners to mealList and drinkList so the program responds to each selection.
     public void addListSelectionListener(ListSelectionListener l) {
         mealList.addListSelectionListener(l);
         drinkList.addListSelectionListener(l);
     }
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BookingAppView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BookingAppView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BookingAppView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BookingAppView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new BookingAppView().setVisible(true);
-            }
-        });
+    
+    private void addDates() {
+        // Populate Travel Date combo box with travel dates for the next month, in DD/MM/YYYY format.
+        LocalDate sysDate = LocalDate.now().plusMonths(1);
+                
+        jcbTravelDate.addItem("3/"+sysDate.getMonthValue()+"/"+sysDate.getYear());
+        jcbTravelDate.addItem("7/"+sysDate.getMonthValue()+"/"+sysDate.getYear());
+        jcbTravelDate.addItem("14/"+sysDate.getMonthValue()+"/"+sysDate.getYear());
+        jcbTravelDate.addItem("20/"+sysDate.getMonthValue()+"/"+sysDate.getYear());
+        jcbTravelDate.addItem("22/"+sysDate.getMonthValue()+"/"+sysDate.getYear());
     }
+//    /**
+//     * @param args the command line arguments
+//     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(BookingAppView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(BookingAppView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(BookingAppView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(BookingAppView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new BookingAppView().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel accSettingsPanel;
@@ -945,6 +956,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
         Output argument = (Output) arg;
         switch (argument.action) {
             case Output.ADD_PAY_ACCOUNT:
+                // Prompt the user to add a Pay account, set the text fields to initially be empty.
                 jtfPAEmail.setText("");
                 jpfPAPassword.setText("");
                 setContentPane(addPayAccountPanel);
@@ -952,11 +964,13 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 break;
             case Output.ADD_PAY_ACCOUNT_SUCCESS:
                 JOptionPane.showMessageDialog(null, "Your Pay account has been added.", "Success", JOptionPane.PLAIN_MESSAGE);
+                // Show the user's Pay account email on the account settings panel.
                 jlSettingsPayMethod.setText("Saved payment method: "+argument.outputString1);
                 setContentPane(accSettingsPanel);
                 setSize(accSettingsPanel.getPreferredSize());
                 break;
             case Output.BACK_TO_HOME:
+                // Send the user back to the home panel/
                 setContentPane(homePanel);
                 setSize(homePanel.getPreferredSize());
                 break;
@@ -965,16 +979,19 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 break;
             case Output.CHANGE_PASSWORD_SUCCESS:
                 JOptionPane.showMessageDialog(null, "Your password has successfuly been changed.", "Success", JOptionPane.PLAIN_MESSAGE);
+                // Empty the password fields.
                 jpfSettingsCPass.setText("");
                 jpfSettingsNPass.setText("");
                 jpfSettingsCNPass.setText("");
                 break;
             case Output.CONFIRM_BOOKING_PROMPT:
+                // Display booking details to the panel, prompt user to confirm.
                 jtaBookingDetails.setText(argument.outputString1+"\n\n"+argument.outputString2);
                 setContentPane(confirmBookingPanel);
                 setSize(confirmBookingPanel.getPreferredSize());
                 break;
             case Output.CONFIRM_BOOKING_SUCCESS:
+                // Display booking confirmation details on the message box.
                 String confirmation = argument.outputString1+"\n"+argument.outputString2+"\n"+argument.outputString3;
                 JOptionPane.showMessageDialog(null, confirmation, "Booking Successful", JOptionPane.INFORMATION_MESSAGE);
                 setContentPane(homePanel);
@@ -986,11 +1003,13 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 break;
             case Output.CREATE_ACCOUNT_SUCCESS:
                 JOptionPane.showMessageDialog(null, "Your account has successfully been created.", "Success", JOptionPane.PLAIN_MESSAGE);
+                // Display username of the current user.
                 jlCurrentUser.setText("Signed in as: "+argument.outputString1);
                 setContentPane(homePanel);
                 setSize(homePanel.getPreferredSize());
                 break;
             case Output.CREATE_BOOKING:
+                // Display the booking panel, undo any prior item selections.
                 mealList.setSelectedValue(null, false);
                 jtpMealDesc.setText("");
                 drinkList.setSelectedValue(null, false);
@@ -1037,6 +1056,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 JOptionPane.showMessageDialog(null, "This Pay account is already in use.", "Error", JOptionPane.ERROR_MESSAGE);
                 break;
             case Output.POPULATE_MEAL_DRINK_LIST:
+                // Add meal and drink items from the array lists to the list models.
                 DefaultListModel mealListModel = new DefaultListModel();
                 mealListModel.addElement("No meal");
                 for (Meal m: argument.mealList) {
@@ -1048,6 +1068,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 for (Drink d: argument.drinkList) {
                     drinkListModel.addElement(d.getName());
                 }
+                // Add the list model items to the JLists.
                 mealList.setModel(mealListModel);
                 drinkList.setModel(drinkListModel);
                 break;
@@ -1069,6 +1090,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 JOptionPane.showMessageDialog(null, "You do not have a payment method saved.", "Error", JOptionPane.ERROR_MESSAGE);
                 break;
             case Output.REGISTER_MEMBER_SUCCESS:
+                // Message box displayed upon registering new membership.
                 String newMemberMessage = "Thank you for becoming a member!\n"
                         + "Your new membership ID: "+argument.outputString1+"\n"
                         + "Membership expiry date: "+argument.outputString2;
@@ -1091,9 +1113,11 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 JOptionPane.showMessageDialog(null, "The username you entered is already in use.", "Error", JOptionPane.ERROR_MESSAGE);
                 break;
             case Output.VIEW_ACCOUNT_SETTINGS:
+                // Display the current user's full name, username, and Pay account email on the settings panel.
                 jtfSettingsUName.setText(argument.outputString1);
                 jtfSettingsFName.setText(argument.outputString2);
                 jlSettingsPayMethod.setText(argument.outputString3);
+                // Empty password fields.
                 jpfSettingsCPass.setText("");
                 jpfSettingsNPass.setText("");
                 jpfSettingsCNPass.setText("");
@@ -1116,10 +1140,12 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 JOptionPane.showMessageDialog(null, argument.outputString1, "Ticket", JOptionPane.PLAIN_MESSAGE);
                 break;
             case Output.VIEW_TICKET_LIST:
+                // Add ticket list items to the list model.
                 DefaultListModel ticketListModel = new DefaultListModel();
                 for (Ticket t: argument.ticketList) {
                     ticketListModel.addElement(t.getTicketNo()+": "+t.getDestination()+" "+t.getTravelDate().format(DateTimeFormatter.ofPattern("dd-LLL-yyyy")));
                 }
+                // Add items from the model to the JList.
                 ticketList.setModel(ticketListModel);
                 setContentPane(ticketViewPanel);
                 setSize(ticketViewPanel.getPreferredSize());

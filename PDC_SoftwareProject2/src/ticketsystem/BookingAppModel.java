@@ -31,17 +31,24 @@ public class BookingAppModel extends Observable {
         listsFilled = false;
     }
     
+    // If input email and password are valid, then add them to the PAY_ACCOUNTS table.
     public void addPayAccount(String email, String password) {
         if (payDB.containsPayAcc(email)) {
+            // Check if the Pay account email is already in the database.
             output.action = Output.PA_IN_USE;
         }
         else if (!(email.contains("@") && email.contains(".") && email.length() > 5)) {
+            // Email address must be a valid address(contains @, ., and must be greater than 5 characters in length).
             output.action = Output.INVALID_PA_EMAIL;
         }
         else if (password.length() < 8 || password.length() > 20) {
+            // Passwords have a length limit of 8-20 characters.
             output.action = Output.INVALID_PA_PASSWORD;
         }
         else {
+            // Create a new Pay account object, save the info to the PAY_ACCOUNTS table.
+            // Update the user's PA_EMAIL field in the USERS or MEMBERS table and set the
+            // Pay account for the User object.
             output.action = Output.ADD_PAY_ACCOUNT_SUCCESS;
             output.outputString1 = email;
             PayAcc payAccount = new PayAcc(email, password);
@@ -58,27 +65,33 @@ public class BookingAppModel extends Observable {
         this.notifyObservers(output);
     }
 
+    // Send the user back to the home screen.
     public void backToHome() {
         output.action = Output.BACK_TO_HOME;
         this.setChanged();
         this.notifyObservers(output);
     }
     
+    // Send the user to the Book Ticket panel.
     public void createBooking() {
         output.action = Output.CREATE_BOOKING;
         this.setChanged();
         this.notifyObservers(output);
     }
     
+    // Check if the current date is later than the membership expiry date, move User info from 
+    // the MEMBERS table to the USERS table if true.
     public void revokeMembershipIfExpired() {
         Member currentMember = (Member) currentUser;
         if (currentMember.getExpiry().compareTo(LocalDate.now()) < 0) {
             memberDB.deleteMember(currentMember);
-            currentUser = (User) currentUser;
+            currentUser = (User) currentUser; // Type-cast currentUser to be a User object instead of a Member object.
             userDB.saveUser(currentUser);
         }
     }
     
+    // Iterate through list of tickets retrieved from the TICKETS table, remove each ticket
+    // from the database if the current date is later than the travel date on the ticket.
     public void deleteExpiredTickets() {
         ArrayList<Ticket> ticketList = ticketDB.getTicketList(currentUser);
         for (Ticket t: ticketList) {
@@ -88,9 +101,13 @@ public class BookingAppModel extends Observable {
         }
     }
     
+    // Check if the selected booking details are valid, then print out details and costs to the screen.
     public void validateBooking(String journey, String travelDate, String departTime, String mealName, String drinkName) {
+        // Get the destination from the journey selection.
         String[] splitJourney = journey.split(" ");
         String destination = splitJourney[splitJourney.length - 1];
+        
+        // Check if the user has a Pay account saved.
         if (currentUser.getPayAccount() == null) {
             output.action = Output.BOOKING_ERROR;
             output.outputString1 = "Please add a payment method before making a booking.\n"
@@ -98,18 +115,23 @@ public class BookingAppModel extends Observable {
         }
         else {
             if (ticketDB.userHasBooking(currentUser, toLocalDate(travelDate), toLocalTime(departTime))) {
+                // Check if the user already has a ferry booked on the selected date and time.
                 output.action = Output.BOOKING_ERROR;
                 output.outputString1 = "It seems you already have a booking for the date and time you selected. Please select another date or time.";
             }
             else if (ticketDB.userHasBooking(currentUser, toLocalDate(travelDate), destination)) {
+                // Check if the user already has a ferry booked to the selected destination on the selected date.
                 output.action = Output.BOOKING_ERROR;
                 output.outputString1 = "It seems you have already booked this trip on the date you selected. Please select another date or journey.";
             }
             else if (mealName == null || drinkName == null) {
+                // Ensure that the user selects a meal and drink item.
                 output.action = Output.BOOKING_ERROR;
                 output.outputString1 = "Please select a meal and drink item.";
             }
             else {
+                // Calculate and print the costs and the details.
+                // Notify the observer to prompt the user to confirm the booking details.
                 output.action = Output.CONFIRM_BOOKING_PROMPT;
                 output.outputString1 = "Journey: "+journey+"\n"
                         + "Travel Date: "+travelDate+"\n"
@@ -140,6 +162,7 @@ public class BookingAppModel extends Observable {
                         + "Subtotal: $"+df.format(subtotal)+"\n";
                 
                 if (currentUser instanceof Member) {
+                    // Apply member's discount to the total if applicable.
                     output.outputString2 += "Discount: -$"+df.format(subtotal * 0.2)+"\n";
                     total = subtotal * 0.8;
                 }
@@ -155,16 +178,20 @@ public class BookingAppModel extends Observable {
         this.notifyObservers(output);
     }
     
+    // Get the selected booking details, create a new Ticket object, save details to the TICKETS table.
     public void confirmBooking(String journey, String travelDate, String departTime, String mealName, String drinkName, double amountPaid) {
+        // Get the Destination enum.
         Destination destination = Destination.WELLINGTON;
         String departLoc = journey.split(" ")[0];
         if (departLoc.equals("Wellington")) {
             destination = Destination.PICTON;
         }
         
+        // Convert date and time strings to LocalDate and LocalTime.
         LocalDate travelDateLD = toLocalDate(travelDate);
         LocalTime departTimeLD = toLocalTime(departTime);
         
+        // Get the Meal and Drink objects from the database.
         Meal meal = null;
         if (!mealName.equals("No meal")) {
             meal = menuDB.getMeal(mealName);
@@ -175,9 +202,11 @@ public class BookingAppModel extends Observable {
             drink = menuDB.getDrink(drinkName);
         }
         
+        // Save the new Ticket info to the TICKETS table.
         Ticket newTicket = new Ticket(amountPaid, meal, drink, travelDateLD, departTimeLD, destination, currentUser.getUsername());
         ticketDB.saveTicket(newTicket);
         
+        // Display booking confirmation and info.
         output.action = Output.CONFIRM_BOOKING_SUCCESS;
         output.outputString1 = "Ferry booking confirmed for "+currentUser.getFullname()+" on "+travelDateLD.format(DateTimeFormatter.ofPattern("dd-LLL-yyyy"))+" "+departTime+" from "+journey+".";
         output.outputString2 = "Your ticket number: "+newTicket.getTicketNo();
@@ -194,6 +223,8 @@ public class BookingAppModel extends Observable {
         this.notifyObservers(output);
     }
     
+    // Get Meal list and Drink list from the MEALS and DRINKS table, add items
+    // to the JLists.
     public void createMealDrinkLists() {
         output.action = Output.POPULATE_MEAL_DRINK_LIST;
         output.mealList = menuDB.getMealList();
@@ -204,6 +235,9 @@ public class BookingAppModel extends Observable {
         this.notifyObservers(output);
     }
     
+    // Check if the user entered the correct current password and that the new password and confirm
+    // password fields meet password requirements, then change the user's password in the database
+    // and currentUser object.
     public void changePassword(String currentPassword, String newPassword, String confirmPassword) {
         if (!currentPassword.equals(currentUser.getPassword())) {
             output.action = Output.WRONG_CURRENT_PASSWORD;
@@ -213,6 +247,7 @@ public class BookingAppModel extends Observable {
             output.action = Output.INVALID_NEW_PASSWORD;
         }
         else if (!newPassword.equals(confirmPassword)) {
+            // New password and confirm password fields must match.
             output.action = Output.NEW_PASSWORD_MISMATCH;
         }
         else {
@@ -241,14 +276,7 @@ public class BookingAppModel extends Observable {
         this.notifyObservers(output);
     }
     
-    public void closeDBConnections() {
-        userDB.closeConnection();
-        memberDB.closeConnection();
-        ticketDB.closeConnection();
-        payDB.closeConnection();
-        menuDB.closeConnection();
-    }
-    
+    // Get the details of the selected menu item from the database, display them on the panel.
     public void printItemInfo(String item) {
         if (item.equals("No meal")) {
             output.action = Output.PRINT_MEAL_INFO;
@@ -259,7 +287,7 @@ public class BookingAppModel extends Observable {
             output.outputString1 = "";
         }
         else {
-            if (menuDB.containsMeal(item)) {
+            if (menuDB.containsMeal(item)) { // Check if selected item is a meal or drink.
                 Meal selectedMeal = menuDB.getMeal(item);
                 output.action = Output.PRINT_MEAL_INFO;
                 output.outputString1 = selectedMeal.getDesc();
@@ -276,8 +304,11 @@ public class BookingAppModel extends Observable {
         this.notifyObservers(output);
     }
     
+    // Move user details from the USERS table to the MEMBERS table.
+    // Set currentUser to be a Member instance.
     public void registerMember() {
         if (currentUser.getPayAccount() == null) {
+            // User must have a Pay account saved.
             output.action = Output.REGISTER_MEMBER_ERROR;
         }
         else {
@@ -287,6 +318,7 @@ public class BookingAppModel extends Observable {
             currentUser = currentUserMember;
             
             output.action = Output.REGISTER_MEMBER_SUCCESS;
+            // Output the member ID and expiry date to the panel.
             output.outputString1 = String.valueOf(currentUserMember.getMemberID());
             output.outputString2 = currentUserMember.getExpiry().toString();
         }
@@ -294,6 +326,7 @@ public class BookingAppModel extends Observable {
         this.notifyObservers(output);
     }
     
+    // Notify the observer to display the user's membership details.
     public void viewMembership() {
         if (currentUser instanceof Member) {
             output.action = Output.VIEW_MEMBERSHIP;
@@ -302,12 +335,15 @@ public class BookingAppModel extends Observable {
             output.outputString2 = currentMember.getExpiry().toString();
         }
         else {
+            // If the user is not a member, notify the observer to display the membership option prompt.
             output.action = Output.VIEW_MEMBERSHIP_OPTION;
         }
         this.setChanged();
         this.notifyObservers(output);
     }
     
+    // Notify the observer to display the account settings.
+    // Display the user's Pay account email (if applicable), username and full name.
     public void viewAccountSettings() {
         output.action = Output.VIEW_ACCOUNT_SETTINGS;
         output.outputString1 = currentUser.getUsername();
@@ -324,6 +360,7 @@ public class BookingAppModel extends Observable {
         this.notifyObservers(output);
     }
     
+    // Load and display ticket from the TICKETS table matching the selected ticket number.
     public void viewTicket(int ticketNo) {
         output.action = Output.VIEW_TICKET;
         output.outputString1 = ticketDB.loadTicket(ticketNo).toString();
@@ -331,6 +368,7 @@ public class BookingAppModel extends Observable {
         this.notifyObservers(output);
     }
     
+    // Get a list of the user's tickets from the TICKETS table, display on the panel.
     public void viewTicketList() {
         output.action = Output.VIEW_TICKET_LIST;
         output.ticketList = ticketDB.getTicketList(currentUser);
@@ -346,17 +384,20 @@ public class BookingAppModel extends Observable {
         this.notifyObservers(output);
     }
     
+    // Prompt the user to add a Pay account.
     public void managePayAccount() {
         if (currentUser.getPayAccount() == null) {
             output.action = Output.ADD_PAY_ACCOUNT;
         }
         else {
+            // If the user already has a Pay account, prompt them to remove it.
             output.action = Output.REMOVE_PAY_ACCOUNT;
         }
         this.setChanged();
         this.notifyObservers(output);
     }
     
+    // Remove the user's Pay account from the currentUser object and from the database.
     public void removePayAccount() {
         payDB.deletePayAcc(currentUser.getPayAccount());
         currentUser.setPayAccount(null);
@@ -371,11 +412,13 @@ public class BookingAppModel extends Observable {
         this.notifyObservers(output);
     }
     
+    // Convert user-selected date to LocalDate.
     private LocalDate toLocalDate(String date) {
         String[] splitDate = date.split("/");
         return LocalDate.of(Integer.parseInt(splitDate[2]), Integer.parseInt(splitDate[1]), Integer.parseInt(splitDate[0]));
     }
     
+    // Convert user-selected time to LocalTime.
     private LocalTime toLocalTime(String time) {
         String[] splitTime = time.split(" ");
         int hour = Integer.parseInt(splitTime[0].split(":")[0]);
