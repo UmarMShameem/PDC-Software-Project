@@ -10,12 +10,13 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class TicketDB extends DBManager {
+public final class TicketDB extends DBManager {
     public TicketDB() {
         super();
         createTable();
     }
 
+    // Query the TICKETS table to check if it contains the generated ticket number.
     public boolean containsTicketNo(int ticketNo) {
         String sqlQuery = "SELECT * FROM TICKETS WHERE TICKET_NO="+ticketNo;
         ResultSet rs;
@@ -31,6 +32,7 @@ public class TicketDB extends DBManager {
         return false;
     }
     
+    // Delete TICKETS entry where the TICKET_NO field matches the number of the input ticket object.
     public void deleteTicket(Ticket ticket) {
         String ticketDelete = "DELETE FROM TICKETS WHERE TICKET_NO="+ticket.getTicketNo();
         try {
@@ -41,11 +43,12 @@ public class TicketDB extends DBManager {
         }
     }
     
+    // Return a list of tickets that contain the username of the input User object.
     public ArrayList<Ticket> getTicketList(User user) {
         ArrayList<Ticket> ticketList = new ArrayList<>();
         String sqlQuery = "SELECT * FROM TICKETS WHERE USERNAME='"+user.getUsername()+"'";
         
-        MenuDB menuDB = new MenuDB();
+        MenuDB menuDB = new MenuDB(); // MenuDB instance for getting Meal/Drink objects that match the name in the table entry.
         
         try {
             ResultSet rs = statement.executeQuery(sqlQuery);
@@ -72,6 +75,7 @@ public class TicketDB extends DBManager {
         return ticketList;
     }
     
+    // Query the TICKETS table for an entry matching the input ticket number, generate and return a Ticket object based on ResultSet.
     public Ticket loadTicket(int ticketNo) {
         String sqlQuery = "SELECT * FROM TICKETS WHERE TICKET_NO="+ticketNo;
         MenuDB menuDB = new MenuDB();
@@ -99,6 +103,7 @@ public class TicketDB extends DBManager {
         return null;
     }
     
+    // Insert Ticket object info into the TICKETS table.
     public void saveTicket(Ticket ticket) {
         String ticketInsert = "INSERT INTO TICKETS VALUES ("
                 +ticket.getTicketNo()+", "
@@ -118,7 +123,9 @@ public class TicketDB extends DBManager {
         }
     }
     
+    // Return true if a user already has a booking that matches the input travel date and departure time.
     public boolean userHasBooking(User user, LocalDate travelDate, LocalTime departTime) {
+        // Query the TICKETS table for an entry containing the user's username, travel date and departure time.
         String sqlQuery = "SELECT * FROM TICKETS WHERE USERNAME='"+user.getUsername()
                 +"' AND TRAVEL_DATE='"+Date.valueOf(travelDate)
                 +"' AND DEPART_TIME='"+Time.valueOf(departTime)+"'";
@@ -134,7 +141,9 @@ public class TicketDB extends DBManager {
         return false;
     }
     
+    // Return true if a user already has a booking that matches the input travel date and destination.
     public boolean userHasBooking(User user, LocalDate travelDate, String destination) {
+        // Query the TICKETS table for an entry containing the user's username, travel date and destination.
         String sqlQuery = "SELECT * FROM TICKETS WHERE USERNAME='"+user.getUsername()
                 +"' AND TRAVEL_DATE='"+Date.valueOf(travelDate)
                 +"' AND DESTINATION='"+destination.toUpperCase()+"'";
