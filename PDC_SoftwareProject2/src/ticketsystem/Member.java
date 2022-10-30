@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.Random;
 
 public final class Member extends User {
-    public static final double MEMBER_DISCOUNT = 0.12;
     private int memberID;
     private LocalDate expiry;
     

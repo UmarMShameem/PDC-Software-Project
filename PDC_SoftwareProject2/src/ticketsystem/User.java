@@ -1,20 +1,16 @@
 package ticketsystem;
 
-import java.util.HashSet;
-
 public class User {
     private String username;
     private String password;
     private String fullname;
     private PayAcc payAccount;
-    private HashSet<Ticket> bookings;
     
     // Constructor for creating a new User
     public User(String username, String password, String fullname) {
         this.setUsername(username);
         this.setPassword(password);
         this.setFullname(fullname);
-        this.setBookings(new HashSet<Ticket>());
     }
     
     // Constructor for loading an existing User
@@ -47,14 +43,6 @@ public class User {
 
     final public void setFullname(String fullname) {
         this.fullname = fullname;
-    }
-
-    public HashSet<Ticket> getBookings() {
-        return bookings;
-    }
-    
-    final public void setBookings(HashSet<Ticket> bookings) {
-        this.bookings = bookings;
     }
 
     public PayAcc getPayAccount() {
