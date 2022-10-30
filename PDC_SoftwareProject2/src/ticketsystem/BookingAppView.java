@@ -119,6 +119,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
         ticketList = new javax.swing.JList<>();
         jbViewTicket = new javax.swing.JButton();
         jbViewTicketBack = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
         loginPanel = new javax.swing.JPanel();
         jtfUsername = new javax.swing.JTextField();
         jlUsername = new javax.swing.JLabel();
@@ -645,26 +646,36 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
 
         jbViewTicketBack.setText("Back to main menu");
 
+        jLabel16.setText("Booking List");
+
         javax.swing.GroupLayout ticketViewPanelLayout = new javax.swing.GroupLayout(ticketViewPanel);
         ticketViewPanel.setLayout(ticketViewPanelLayout);
         ticketViewPanelLayout.setHorizontalGroup(
             ticketViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ticketViewPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
+                .addGroup(ticketViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(ticketViewPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE))
+                    .addGroup(ticketViewPanelLayout.createSequentialGroup()
+                        .addGap(101, 101, 101)
+                        .addGroup(ticketViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jbViewTicketBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jbViewTicket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(ticketViewPanelLayout.createSequentialGroup()
-                .addGap(101, 101, 101)
-                .addGroup(ticketViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jbViewTicketBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbViewTicket, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(136, 136, 136)
+                .addComponent(jLabel16)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         ticketViewPanelLayout.setVerticalGroup(
             ticketViewPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ticketViewPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jbViewTicket)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -871,6 +882,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1137,7 +1149,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 setSize(addMembershipPanel.getPreferredSize());
                 break;
             case Output.VIEW_TICKET:
-                JOptionPane.showMessageDialog(null, argument.outputString1, "Ticket", JOptionPane.PLAIN_MESSAGE);
+                JOptionPane.showMessageDialog(null, argument.outputString1+"\n"+argument.outputString2, "Ticket", JOptionPane.PLAIN_MESSAGE);
                 break;
             case Output.VIEW_TICKET_LIST:
                 // Add ticket list items to the list model.

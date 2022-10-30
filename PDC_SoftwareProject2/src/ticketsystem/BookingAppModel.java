@@ -362,8 +362,38 @@ public class BookingAppModel extends Observable {
     
     // Load and display ticket from the TICKETS table matching the selected ticket number.
     public void viewTicket(int ticketNo) {
+        Ticket currentTicket = ticketDB.loadTicket(ticketNo);
+        
+        output.outputString1 = "                         Ticket no. "+currentTicket.getTicketNo()+"\n\n"
+                + "Ticket for: "+currentUser.getFullname()+"\n";
+        if (currentTicket.getDestination().equals(Destination.WELLINGTON)) {
+            output.outputString1 += "Picton - Wellington";
+        }
+        else {
+            output.outputString1 += "Wellington - Picton";
+        }
+        output.outputString1 += "\n--------------------------------------------------------------";
+        
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-LLL-yyyy");
+        output.outputString2 = "Date booked: "+currentTicket.getDateBooked().format(dtf)+"\n"
+                + "Travel date: "+currentTicket.getTravelDate().format(dtf)+"\n"
+                + "Departure time: "+currentTicket.getDepartTime()+"\n"
+                + "--------------------------------------------------------------\n";
+        if (currentTicket.getMeal() == null) {
+            output.outputString2 += "Meal: None\n";
+        }
+        else {
+            output.outputString2 += "Meal: "+currentTicket.getMeal().getName()+"\n";
+        }
+        
+        if (currentTicket.getDrink() == null) {
+            output.outputString2 += "Drink: None\n\n";
+        }
+        else {
+            output.outputString2 += "Drink: "+currentTicket.getDrink().getName()+"\n\n";
+        }
+        output.outputString2 += "Amount paid: $"+currentTicket.getAmountPaid()+"0";
         output.action = Output.VIEW_TICKET;
-        output.outputString1 = ticketDB.loadTicket(ticketNo).toString();
         this.setChanged();
         this.notifyObservers(output);
     }
