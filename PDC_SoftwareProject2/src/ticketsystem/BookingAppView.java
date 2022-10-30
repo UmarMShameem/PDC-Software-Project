@@ -847,7 +847,7 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
     public javax.swing.JPasswordField jpfSettingsCNPass;
     public javax.swing.JPasswordField jpfSettingsCPass;
     public javax.swing.JPasswordField jpfSettingsNPass;
-    private javax.swing.JTextArea jtaBookingDetails;
+    public javax.swing.JTextArea jtaBookingDetails;
     public javax.swing.JPasswordField jtfConfirmPass;
     public javax.swing.JTextField jtfFName;
     public javax.swing.JPasswordField jtfNewPass;
@@ -898,6 +898,12 @@ public class BookingAppView extends javax.swing.JFrame implements Observer {
                 jtaBookingDetails.setText(argument.outputString1+"\n\n"+argument.outputString2);
                 setContentPane(confirmBookingPanel);
                 setSize(confirmBookingPanel.getPreferredSize());
+                break;
+            case Output.CONFIRM_BOOKING_SUCCESS:
+                String confirmation = argument.outputString1+"\n"+argument.outputString2+"\n"+argument.outputString3;
+                JOptionPane.showMessageDialog(null, confirmation, "Booking Successful", JOptionPane.INFORMATION_MESSAGE);
+                setContentPane(homePanel);
+                setSize(homePanel.getPreferredSize());
                 break;
             case Output.CREATE_ACCOUNT:
                 setContentPane(createAccountPanel);

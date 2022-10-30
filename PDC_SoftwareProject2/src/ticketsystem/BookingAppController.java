@@ -116,6 +116,16 @@ public class BookingAppController implements ActionListener, ListSelectionListen
                         this.view.mealList.getSelectedValue(), 
                         this.view.drinkList.getSelectedValue());
                 break;
+            case "Confirm Booking":
+                String[] bookingDetails = this.view.jtaBookingDetails.getText().split("\\$");
+                double amountPaid = Double.parseDouble(bookingDetails[bookingDetails.length - 1]);
+                this.model.confirmBooking((String)this.view.jcbJourney.getSelectedItem(), 
+                        (String) this.view.jcbTravelDate.getSelectedItem(), 
+                        (String) this.view.jcbDepartTime.getSelectedItem(), 
+                        this.view.mealList.getSelectedValue(), 
+                        this.view.drinkList.getSelectedValue(), 
+                        amountPaid);
+                break;
         }
     }
 

@@ -83,6 +83,22 @@ public class TicketDB extends DBManager {
         return false;
     }
     
+    public boolean userHasBooking(User user, LocalDate travelDate, String destination) {
+        String sqlQuery = "SELECT * FROM TICKETS WHERE USERNAME='"+user.getUsername()
+                +"' AND TRAVEL_DATE='"+Date.valueOf(travelDate)
+                +"' AND DESTINATION='"+destination.toUpperCase()+"'";
+        try {
+            ResultSet rs = statement.executeQuery(sqlQuery);
+            if (rs.next()) {
+                return true;
+            }
+        } 
+        catch (SQLException ex) {
+            Logger.getLogger(TicketDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
     @Override
     public void createTable() {
         if (!this.containsTable("TICKETS")) {

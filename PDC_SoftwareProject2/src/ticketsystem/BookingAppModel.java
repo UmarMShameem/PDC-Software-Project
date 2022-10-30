@@ -3,6 +3,7 @@ package ticketsystem;
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Observable;
 
 public class BookingAppModel extends Observable {
@@ -69,6 +70,8 @@ public class BookingAppModel extends Observable {
     }
     
     public void validateBooking(String journey, String travelDate, String departTime, String mealName, String drinkName) {
+        String[] splitJourney = journey.split(" ");
+        String destination = splitJourney[splitJourney.length - 1];
         if (currentUser.getPayAccount() == null) {
             output.action = Output.BOOKING_ERROR;
             output.outputString1 = "Please add a payment method before making a booking.\n"
@@ -78,6 +81,10 @@ public class BookingAppModel extends Observable {
             if (ticketDB.userHasBooking(currentUser, toLocalDate(travelDate), toLocalTime(departTime))) {
                 output.action = Output.BOOKING_ERROR;
                 output.outputString1 = "It seems you already have a booking for the date and time you selected. Please select another date or time.";
+            }
+            else if (ticketDB.userHasBooking(currentUser, toLocalDate(travelDate), destination)) {
+                output.action = Output.BOOKING_ERROR;
+                output.outputString1 = "It seems you have already booked this trip on the date you selected. Please select another date or journey.";
             }
             else if (mealName == null || drinkName == null) {
                 output.action = Output.BOOKING_ERROR;
@@ -128,6 +135,38 @@ public class BookingAppModel extends Observable {
         }
         this.setChanged();
         this.notifyObservers(output);
+    }
+    
+    public void confirmBooking(String journey, String travelDate, String departTime, String mealName, String drinkName, double amountPaid) {
+        Destination destination = Destination.WELLINGTON;
+        String departLoc = journey.split(" ")[0];
+        if (departLoc.equals("Wellington")) {
+            destination = Destination.PICTON;
+        }
+        
+        LocalDate travelDateLD = toLocalDate(travelDate);
+        LocalTime departTimeLD = toLocalTime(departTime);
+        
+        Meal meal = null;
+        if (!mealName.equals("No meal")) {
+            meal = menuDB.getMeal(mealName);
+        }
+        
+        Drink drink = null;
+        if (!drinkName.equals(output)) {
+            drink = menuDB.getDrink(drinkName);
+        }
+        
+        Ticket newTicket = new Ticket(amountPaid, meal, drink, travelDateLD, departTimeLD, destination, currentUser.getUsername());
+        ticketDB.saveTicket(newTicket);
+        
+        output.action = Output.CONFIRM_BOOKING_SUCCESS;
+        output.outputString1 = "Ferry booking confirmed for "+currentUser.getFullname()+" on "+travelDateLD.format(DateTimeFormatter.ofPattern("dd-LLL-yyyy"))+" "+departTime+" from "+journey+".";
+        output.outputString2 = "Your ticket number: "+newTicket.getTicketNo();
+        output.outputString3 = "You can view your tickets by clicking on View Bookings on the main menu.";
+        this.setChanged();
+        this.notifyObservers(output);
+        
     }
 
     // Notify View to switch to the Create Account JPanel.
