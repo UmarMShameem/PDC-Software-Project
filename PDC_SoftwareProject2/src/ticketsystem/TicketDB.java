@@ -57,10 +57,21 @@ public final class TicketDB extends DBManager {
                 if (rs.getString("DESTINATION").equals("PICTON")) {
                     destination = Destination.PICTON;
                 }
+                
+                Meal meal = null;
+                if (rs.getString("MEAL") != null) {
+                    meal = menuDB.getMeal(rs.getString("MEAL"));
+                }
+                
+                Drink drink = null;
+                if (rs.getString("DRINK") != null) {
+                    drink = menuDB.getDrink(rs.getString("DRINK"));
+                }
+                
                 ticketList.add(new Ticket(rs.getInt("TICKET_NO"), 
                         rs.getDouble("AMOUNT_PAID"), 
-                        menuDB.getMeal(rs.getString("MEAL")), 
-                        menuDB.getDrink(rs.getString("DRINK")), 
+                        meal, 
+                        drink, 
                         rs.getDate("DATE_BOOKED").toLocalDate(), 
                         rs.getDate("TRAVEL_DATE").toLocalDate(), 
                         rs.getTime("DEPART_TIME").toLocalTime(), 
@@ -86,10 +97,21 @@ public final class TicketDB extends DBManager {
                 if (rs.getString("DESTINATION").equals("PICTON")) {
                     destination = Destination.PICTON;
                 }
+                
+                Meal meal = null;
+                if (rs.getString("MEAL") != null) {
+                    meal = menuDB.getMeal(rs.getString("MEAL"));
+                }
+                
+                Drink drink = null;
+                if (rs.getString("DRINK") != null) {
+                    drink = menuDB.getDrink(rs.getString("DRINK"));
+                }
+                
                 return new Ticket(rs.getInt("TICKET_NO"), 
                         rs.getDouble("AMOUNT_PAID"), 
-                        menuDB.getMeal(rs.getString("MEAL")), 
-                        menuDB.getDrink(rs.getString("DRINK")), 
+                        meal, 
+                        drink, 
                         rs.getDate("DATE_BOOKED").toLocalDate(), 
                         rs.getDate("TRAVEL_DATE").toLocalDate(), 
                         rs.getTime("DEPART_TIME").toLocalTime(), 
@@ -105,11 +127,27 @@ public final class TicketDB extends DBManager {
     
     // Insert Ticket object info into the TICKETS table.
     public void saveTicket(Ticket ticket) {
+        String mealName = "";
+        if (ticket.getMeal() == null) {
+            mealName = "No meal";
+        }
+        else {
+            mealName = ticket.getMeal().getName();
+        }
+        
+        String drinkName = "";
+        if (ticket.getDrink() == null) {
+            drinkName = "No drink";
+        }
+        else {
+            drinkName = ticket.getDrink().getName();
+        }
+        
         String ticketInsert = "INSERT INTO TICKETS VALUES ("
                 +ticket.getTicketNo()+", "
                 +ticket.getAmountPaid()+", '"
-                +ticket.getMeal().getName()+"', '"
-                +ticket.getDrink().getName()+"', '"
+                +mealName+"', '"
+                +drinkName+"', '"
                 +Date.valueOf(ticket.getDateBooked())+"', '"
                 +Date.valueOf(ticket.getTravelDate())+"', '"
                 +Time.valueOf(ticket.getDepartTime())+"', '"

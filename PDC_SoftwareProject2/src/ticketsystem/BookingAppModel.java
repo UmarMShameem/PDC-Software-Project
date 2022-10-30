@@ -198,7 +198,7 @@ public class BookingAppModel extends Observable {
         }
         
         Drink drink = null;
-        if (!drinkName.equals(output)) {
+        if (!drinkName.equals("No drink")) {
             drink = menuDB.getDrink(drinkName);
         }
         

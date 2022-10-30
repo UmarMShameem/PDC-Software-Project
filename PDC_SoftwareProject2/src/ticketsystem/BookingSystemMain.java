@@ -1,5 +1,6 @@
 package ticketsystem;
 
+// Main class for the booking system.
 public class BookingSystemMain {
     public static void main(String[] args) {
         BookingAppModel model = new BookingAppModel();
