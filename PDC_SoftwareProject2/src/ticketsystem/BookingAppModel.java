@@ -111,8 +111,7 @@ public class BookingAppModel extends Observable {
             }
             else {
                 output.action = Output.CONFIRM_BOOKING_PROMPT;
-                output.outputString1 = "Confirm booking?\n\n"
-                        + "Journey: "+journey+"\n"
+                output.outputString1 = "Journey: "+journey+"\n"
                         + "Travel Date: "+travelDate+"\n"
                         + "Departure Time: "+departTime+"\n"
                         + "Meal: "+mealName+"\n"
@@ -321,6 +320,20 @@ public class BookingAppModel extends Observable {
             output.outputString3 = "No payment method saved.";
         }
         
+        this.setChanged();
+        this.notifyObservers(output);
+    }
+    
+    public void viewTicket(int ticketNo) {
+        output.action = Output.VIEW_TICKET;
+        output.outputString1 = ticketDB.loadTicket(ticketNo).toString();
+        this.setChanged();
+        this.notifyObservers(output);
+    }
+    
+    public void viewTicketList() {
+        output.action = Output.VIEW_TICKET_LIST;
+        output.ticketList = ticketDB.getTicketList(currentUser);
         this.setChanged();
         this.notifyObservers(output);
     }

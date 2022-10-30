@@ -126,6 +126,15 @@ public class BookingAppController implements ActionListener, ListSelectionListen
                         this.view.drinkList.getSelectedValue(), 
                         amountPaid);
                 break;
+            case "View Bookings":
+                this.model.viewTicketList();
+                break;
+            case "View Ticket":
+                String selectedTicket = this.view.ticketList.getSelectedValue();
+                if (selectedTicket != null) {
+                    this.model.viewTicket(Integer.parseInt(selectedTicket.split(":")[0]));
+                }
+                break;
         }
     }
 

@@ -33,9 +33,11 @@ public class Output {
     public static final int REMOVE_PAY_ACCOUNT_SUCCESS = 27;
     public static final int USERNAME_EXISTS = 28;
     public static final int VIEW_ACCOUNT_SETTINGS = 29;
-    public static final int VIEW_MEMBERSHIP = 30;
-    public static final int VIEW_MEMBERSHIP_OPTION = 31;
-    public static final int WRONG_CURRENT_PASSWORD = 32;
+    public static final int VIEW_TICKET_LIST = 30;
+    public static final int VIEW_TICKET = 31;
+    public static final int VIEW_MEMBERSHIP = 32;
+    public static final int VIEW_MEMBERSHIP_OPTION = 33;
+    public static final int WRONG_CURRENT_PASSWORD = 34;
     
     // BookingAppModel will take an Output object with an action and 
     // output strings to notify the View.
@@ -44,5 +46,6 @@ public class Output {
     String outputString3;
     ArrayList<Meal> mealList;
     ArrayList<Drink> drinkList;
+    ArrayList<Ticket> ticketList;
     int action;
 }

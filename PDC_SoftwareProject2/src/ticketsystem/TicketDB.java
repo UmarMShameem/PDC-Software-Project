@@ -43,7 +43,7 @@ public class TicketDB extends DBManager {
     
     public ArrayList<Ticket> getTicketList(User user) {
         ArrayList<Ticket> ticketList = new ArrayList<>();
-        String sqlQuery = "SELECT * FROM TICKETS WHERE USERNAME='"+user.getUsername();
+        String sqlQuery = "SELECT * FROM TICKETS WHERE USERNAME='"+user.getUsername()+"'";
         
         MenuDB menuDB = new MenuDB();
         
