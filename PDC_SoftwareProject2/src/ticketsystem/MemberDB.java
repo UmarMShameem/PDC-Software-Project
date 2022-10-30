@@ -111,7 +111,7 @@ public final class MemberDB extends DBManager {
             insertMember = "INSERT INTO MEMBERS VALUES ("+member.getMemberID()+", '"
                 +Date.valueOf(member.getExpiry())+"', '"
                 +member.getUsername()+"', '"
-                +member.getPassword()+"', "
+                +member.getPassword()+"', '"
                 +member.getFullname()+"', null)";
         }
         else {
