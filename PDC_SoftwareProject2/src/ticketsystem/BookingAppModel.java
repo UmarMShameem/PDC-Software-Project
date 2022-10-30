@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Observable;
 
 public class BookingAppModel extends Observable {
@@ -69,8 +70,22 @@ public class BookingAppModel extends Observable {
         this.notifyObservers(output);
     }
     
+    public void revokeMembershipIfExpired() {
+        Member currentMember = (Member) currentUser;
+        if (currentMember.getExpiry().compareTo(LocalDate.now()) < 0) {
+            memberDB.deleteMember(currentMember);
+            currentUser = (User) currentUser;
+            userDB.saveUser(currentUser);
+        }
+    }
+    
     public void deleteExpiredTickets() {
-        
+        ArrayList<Ticket> ticketList = ticketDB.getTicketList(currentUser);
+        for (Ticket t: ticketList) {
+            if (t.getTravelDate().compareTo(LocalDate.now()) < 0) {
+                ticketDB.deleteTicket(t);
+            } 
+        }
     }
     
     public void validateBooking(String journey, String travelDate, String departTime, String mealName, String drinkName) {
@@ -430,7 +445,9 @@ public class BookingAppModel extends Observable {
         }
         else {
             currentUser = memberDB.loadMember(username);
+            revokeMembershipIfExpired();
         }
+        deleteExpiredTickets();
         output.action = Output.LOG_IN_SUCCESS;
         output.outputString1 = currentUser.getUsername();
         this.setChanged();
