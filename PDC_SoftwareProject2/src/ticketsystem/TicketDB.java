@@ -6,6 +6,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -30,8 +31,50 @@ public class TicketDB extends DBManager {
         return false;
     }
     
+    public void deleteTicket(Ticket ticket) {
+        String ticketDelete = "DELETE FROM TICKETS WHERE TICKET_NO="+ticket.getTicketNo();
+        try {
+            statement.executeUpdate(ticketDelete);
+        } 
+        catch (SQLException ex) {
+            Logger.getLogger(TicketDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public ArrayList<Ticket> getTicketList(User user) {
+        ArrayList<Ticket> ticketList = new ArrayList<>();
+        String sqlQuery = "SELECT * FROM TICKETS WHERE USERNAME='"+user.getUsername();
+        
+        MenuDB menuDB = new MenuDB();
+        
+        try {
+            ResultSet rs = statement.executeQuery(sqlQuery);
+            while (rs.next()) {
+                Destination destination = Destination.WELLINGTON;
+                if (rs.getString("DESTINATION").equals("PICTON")) {
+                    destination = Destination.PICTON;
+                }
+                ticketList.add(new Ticket(rs.getInt("TICKET_NO"), 
+                        rs.getDouble("AMOUNT_PAID"), 
+                        menuDB.getMeal(rs.getString("MEAL")), 
+                        menuDB.getDrink(rs.getString("DRINK")), 
+                        rs.getDate("DATE_BOOKED").toLocalDate(), 
+                        rs.getDate("TRAVEL_DATE").toLocalDate(), 
+                        rs.getTime("DEPART_TIME").toLocalTime(), 
+                        destination, 
+                        rs.getString("USERNAME")));
+            }
+        } 
+        catch (SQLException ex) {
+            Logger.getLogger(TicketDB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        menuDB.closeConnection();
+        return ticketList;
+    }
+    
     public Ticket loadTicket(int ticketNo) {
         String sqlQuery = "SELECT * FROM TICKETS WHERE TICKET_NO="+ticketNo;
+        MenuDB menuDB = new MenuDB();
         try {
             ResultSet rs = statement.executeQuery(sqlQuery);
             if (rs.next()) {
@@ -39,7 +82,15 @@ public class TicketDB extends DBManager {
                 if (rs.getString("DESTINATION").equals("PICTON")) {
                     destination = Destination.PICTON;
                 }
-                return new Ticket(rs.getInt("TICKET_NO"), rs.getDouble("AMOUNT_PAID"), new Meal(rs.getString("MEAL"), "", 0.0), new Drink(rs.getString("DRINK"), "", 0.0), rs.getDate("DATE_BOOKED").toLocalDate(), rs.getDate("TRAVEL_DATE").toLocalDate(), rs.getTime("DEPART_TIME").toLocalTime(), destination, rs.getString("USERNAME"));
+                return new Ticket(rs.getInt("TICKET_NO"), 
+                        rs.getDouble("AMOUNT_PAID"), 
+                        menuDB.getMeal(rs.getString("MEAL")), 
+                        menuDB.getDrink(rs.getString("DRINK")), 
+                        rs.getDate("DATE_BOOKED").toLocalDate(), 
+                        rs.getDate("TRAVEL_DATE").toLocalDate(), 
+                        rs.getTime("DEPART_TIME").toLocalTime(), 
+                        destination, 
+                        rs.getString("USERNAME"));
             }
         } 
         catch (SQLException ex) {

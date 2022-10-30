@@ -69,6 +69,10 @@ public class BookingAppModel extends Observable {
         this.notifyObservers(output);
     }
     
+    public void deleteExpiredTickets() {
+        
+    }
+    
     public void validateBooking(String journey, String travelDate, String departTime, String mealName, String drinkName) {
         String[] splitJourney = journey.split(" ");
         String destination = splitJourney[splitJourney.length - 1];
