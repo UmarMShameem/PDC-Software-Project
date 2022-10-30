@@ -16,7 +16,7 @@ public final class Ticket {
     private Destination destination;
     private String username;
     
-    // Constructor used when loading an existing ticket from file.
+    // Constructor used when loading an existing ticket from database.
     public Ticket(int ticketNo, double amountPaid, Meal meal, Drink drink, LocalDate dateBooked, LocalDate travelDate, LocalTime departTime, Destination destination, String username) {
         this.setTicketNo(ticketNo);
         this.setAmountPaid(amountPaid);
