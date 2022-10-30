@@ -12,7 +12,6 @@ import java.util.logging.Logger;
 public abstract class DBManager {
     private static final String USER_NAME = "pdc";
     private static final String PASSWORD = "pdcproj2";
-//    private static final String URL = "jdbc:derby://localhost:1527/BookingSystemDB";
     private static final String URL = "jdbc:derby:BookingSystemDB; create=true";
     
     Connection connection;
@@ -35,6 +34,7 @@ public abstract class DBManager {
         }
     }
     
+    // Close connection to the database.
     public void closeConnection() {
         if (connection != null) {
             try {

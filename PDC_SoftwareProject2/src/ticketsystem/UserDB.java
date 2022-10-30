@@ -11,6 +11,7 @@ public final class UserDB extends DBManager {
         createTable();
     }
     
+    // Return true if the USERS table contains the input username, false otherwise.
     public boolean containsUser(String username) {
         String sqlQuery = "SELECT * FROM USERS WHERE USERNAME='"+username+"'";
         try {
@@ -25,6 +26,7 @@ public final class UserDB extends DBManager {
         return false;
     }
     
+    // Delete entry from USERS table containing the user's username.
     public void deleteUser(User user) {
         String userDelete = "DELETE FROM USERS WHERE USERNAME='"+user.getUsername()+"'";
         try {
@@ -35,6 +37,7 @@ public final class UserDB extends DBManager {
         }
     }
     
+    // Find table entry containing the user's username, set PASSWORD field to the new password.
     public void changePassword(User user, String newPassword) {
         String passwordUpdate = "UPDATE USERS SET PASSWORD = '"+newPassword+"' WHERE USERNAME = '"+user.getUsername()+"'";
         try {
@@ -45,6 +48,8 @@ public final class UserDB extends DBManager {
         }
     }
     
+    // Updates a user's PA_EMAIL field upon adding a new Pay Account to the database.
+    // Method also updates PA_EMAIL to be null when the Pay Account has been removed.
     public void updatePayAccount(User user) {
         String paUpdate = "";
         if (user.getPayAccount() == null) {
@@ -61,13 +66,13 @@ public final class UserDB extends DBManager {
         }
     }
 
-// Finds a row in the USERS table matching username, returns User object with data from that row.
+    // Finds a row in the USERS table matching username, returns User object with data from that row.
     public User loadUser(String username) {
         String sqlQuery = "SELECT * FROM USERS WHERE USERNAME='"+username+"'";
         try {
             ResultSet rs = statement.executeQuery(sqlQuery);
             if (rs.next()) {
-                // If PA_EMAIL is empty, return a User object without an associated PayAcc object.
+                // If PA_EMAIL is null, return a User object without an associated PayAcc object.
                 if (rs.getString("PA_EMAIL") == null) {
                     return new User(rs.getString("USERNAME"), rs.getString("PASSWORD"), rs.getString("FULLNAME"));
                 }
