@@ -139,6 +139,9 @@ public class BookingAppController implements ActionListener, ListSelectionListen
                     this.model.viewTicket(Integer.parseInt(selectedTicket.split(":")[0]));
                 }
                 break;
+            case "Back to account settings":
+                this.model.viewAccountSettings();
+                break;
         }
     }
 
