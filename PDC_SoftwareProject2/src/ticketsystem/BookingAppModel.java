@@ -274,6 +274,10 @@ public class BookingAppModel extends Observable {
         output.outputString1 = currentUser.getUsername();
         this.setChanged();
         this.notifyObservers(output);
+        
+        if (!listsFilled) {
+            createMealDrinkLists();
+        }
     }
     
     // Get the details of the selected menu item from the database, display them on the panel.
